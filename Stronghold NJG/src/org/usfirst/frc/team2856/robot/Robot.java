@@ -1,10 +1,6 @@
-
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-//import edu.wpi.first.wpilibj.Timer;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -14,64 +10,76 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    final String defaultAuto = "Default";
-    final String customAuto = "My Auto";
-    String autoSelected;
-//    SendableChooser chooser;
-	
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
-//        chooser = new SendableChooser();
-//        chooser.addDefault("Default Auto", defaultAuto);
-//        chooser.addObject("My Auto", customAuto);
-//        SmartDashboard.putData("Auto choices", chooser);
-    }
-    
 	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString line to get the auto name from the text box
-	 * below the Gyro
+	 * Default Robot-wide initialization which will be called when the robot is
+	 * first powered on. It will be called exactly one time.
 	 *
-	 * You can add additional auto modes by adding additional comparisons to the switch structure below with additional strings.
-	 * If using the SendableChooser make sure to add them to the chooser code above as well.
+	 * Warning: the Driver Station "Robot Code" light and FMS "Robot Ready"
+	 * indicators will be off until RobotInit() exits. Code in RobotInit() that
+	 * waits for enable will cause the robot to never indicate that the code is
+	 * ready, causing the robot to be bypassed in a match.
 	 */
-    public void autonomousInit() {
-//    	autoSelected = (String) chooser.getSelected();
-		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
-		System.out.println("Auto selected: " + autoSelected);
-    }
+	public void robotInit() {
+		RobotMap.init();
+	}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-    	switch(autoSelected) {
-    	case customAuto:
-        //Put custom auto code here   
-            break;
-    	case defaultAuto:
-    	default:
-    	//Put default auto code here
-            break;
-    	}
-    }
+	/**
+	 * Initialization code which will be called each time the robot enters disabled mode.
+	 */
+	public void disabledInit() {
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-    
-    }
-    
+	}
+
+	/**
+	 * Initialization code which will be called each time the robot enters autonomous mode.
+	 */
+	public void autonomousInit() {
+
+	}
+
+	/**
+	 * Initialization code which will be called each time the robot enters teleop mode.
+	 */
+	public void teleopInit() {
+
+	}
+
+	/**
+	 * Initialization code which will be called each time the robot enters test mode.
+	 */
+	public void testInit() {
+
+	}
+
+	/**
+	 * Code which will be called periodically at a regular rate while the robot is in
+	 * disabled mode. (50 Hz)
+	 */
+	public void disabledPeriodic() {
+
+	}
+
+	/**
+	 * Code which will be called periodically at a regular rate while the robot is in
+	 * autonomous mode. (50 Hz)
+	 */
+	public void autonomousPeriodic() {
+
+	}
+
+	/**
+	 * Code which will be called periodically at a regular rate while the robot is in
+	 * teleop mode. (50 Hz)
+	 */
+	public void teleopPeriodic() {
+
+	}
+
+	/**
+	 * Code which will be called periodically at a regular rate while the robot is in
+	 * test mode. (50 Hz)
+	 */
+	public void testPeriodic() {
+
+	}
 }
