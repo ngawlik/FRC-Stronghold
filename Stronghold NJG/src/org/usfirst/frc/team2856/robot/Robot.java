@@ -10,6 +10,13 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	private DriveSys drive;
+	private IntakeSys intake;
+
+	private Autonomous auto;
+	private Disabled disa;
+	private Teleop tele;
+
 	/**
 	 * Default Robot-wide initialization which will be called when the robot is
 	 * first powered on. It will be called exactly one time.
@@ -21,34 +28,41 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		RobotMap.init();
+		
+		drive = new DriveSys();
+		intake = new IntakeSys();
+		
+		auto = new Autonomous(drive, intake);
+		disa = new Disabled(drive, intake);
+		tele = new Teleop(drive, intake);
 	}
 
 	/**
 	 * Initialization code which will be called each time the robot enters disabled mode.
 	 */
 	public void disabledInit() {
-
+		disa.init();
 	}
 
 	/**
 	 * Initialization code which will be called each time the robot enters autonomous mode.
 	 */
 	public void autonomousInit() {
-
+		auto.init();
 	}
 
 	/**
 	 * Initialization code which will be called each time the robot enters teleop mode.
 	 */
 	public void teleopInit() {
-
+		tele.init();
 	}
 
 	/**
 	 * Initialization code which will be called each time the robot enters test mode.
 	 */
 	public void testInit() {
-
+		tele.init();
 	}
 
 	/**
@@ -56,7 +70,7 @@ public class Robot extends IterativeRobot {
 	 * disabled mode. (50 Hz)
 	 */
 	public void disabledPeriodic() {
-
+		disa.periodic();
 	}
 
 	/**
@@ -64,7 +78,7 @@ public class Robot extends IterativeRobot {
 	 * autonomous mode. (50 Hz)
 	 */
 	public void autonomousPeriodic() {
-
+		auto.periodic();
 	}
 
 	/**
@@ -72,7 +86,7 @@ public class Robot extends IterativeRobot {
 	 * teleop mode. (50 Hz)
 	 */
 	public void teleopPeriodic() {
-
+		tele.periodic();
 	}
 
 	/**
@@ -80,6 +94,6 @@ public class Robot extends IterativeRobot {
 	 * test mode. (50 Hz)
 	 */
 	public void testPeriodic() {
-
+		tele.periodic();
 	}
 }
