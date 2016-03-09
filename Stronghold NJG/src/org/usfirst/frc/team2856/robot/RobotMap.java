@@ -25,7 +25,7 @@ public class RobotMap {
 		// Analog Out (none, 0-1)
 		
 		// DIO (0-9, 10-25)
-		DRIVE_ENCODER_LEFT = new Encoder(0, 1, false, EncodingType.k4X);
+		DRIVE_ENCODER_LEFT = new Encoder(0, 1, true, EncodingType.k4X);
 		DRIVE_ENCODER_RIGHT = new Encoder(2, 3, false, EncodingType.k4X);
 		
 		// PWM (0-9, 10-19)
@@ -39,8 +39,8 @@ public class RobotMap {
 //		DRIVE_ACCEL.setSensitivity(1.0);
 //		DRIVE_GYRO.setSensitivity(1.0);
 		
-		DRIVE_ENCODER_LEFT.setDistancePerPulse(1.0);
-		DRIVE_ENCODER_RIGHT.setDistancePerPulse(1.0);
+		DRIVE_ENCODER_LEFT.setDistancePerPulse(0.003522);	// (counts/foot)
+		DRIVE_ENCODER_RIGHT.setDistancePerPulse(0.003522);	// (counts/foot)
 		
 		DRIVE_MOTOR_LEFT.setInverted(true);
 		DRIVE_MOTOR_RIGHT.setInverted(true);
