@@ -47,9 +47,12 @@ public class Teleop {
     	boolean button11Value = joystick.getRawButton(11);
     	if (button11Value && !button11PrevValue)
     	{
-    		double left = drive.encoderGetDistLeft();
-    		double right = drive.encoderGetDistRight();
-    		System.out.printf("Drive Encoder Dist L:%.2f R:%.2f\n", left, right);
+    		double leftDist = drive.encoderGetDistLeft();
+    		double rightDist = drive.encoderGetDistRight();
+    		double leftRate = drive.encoderGetRateLeft();
+    		double rightRate = drive.encoderGetRateRight();
+    		System.out.printf("Drive Encoder Dist L:%.2f R:%.2f Rate L:%.2f R:%.2f\n",
+    				leftDist, rightDist, leftRate, rightRate);
     	}
     	button11PrevValue = button11Value;
     	

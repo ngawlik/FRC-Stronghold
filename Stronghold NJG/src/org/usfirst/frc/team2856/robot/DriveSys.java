@@ -25,6 +25,14 @@ public class DriveSys {
 		return RobotMap.DRIVE_ENCODER_RIGHT.getDistance();
 	}
 
+	public double encoderGetRateLeft() {
+		return RobotMap.DRIVE_ENCODER_LEFT.getRate();
+	}
+
+	public double encoderGetRateRight() {
+		return RobotMap.DRIVE_ENCODER_RIGHT.getRate();
+	}
+
 	public void encoderReset() {
 		RobotMap.DRIVE_ENCODER_LEFT.reset();
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();

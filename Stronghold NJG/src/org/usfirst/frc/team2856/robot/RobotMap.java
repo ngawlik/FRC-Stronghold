@@ -39,8 +39,8 @@ public class RobotMap {
 //		DRIVE_ACCEL.setSensitivity(1.0);
 //		DRIVE_GYRO.setSensitivity(1.0);
 		
-		DRIVE_ENCODER_LEFT.setDistancePerPulse(0.003522);	// (counts/foot)
-		DRIVE_ENCODER_RIGHT.setDistancePerPulse(0.003522);	// (counts/foot)
+		DRIVE_ENCODER_LEFT.setDistancePerPulse(0.003522);	// (feet/count)
+		DRIVE_ENCODER_RIGHT.setDistancePerPulse(0.003522);	// (feet/count)
 		
 		DRIVE_MOTOR_LEFT.setInverted(true);
 		DRIVE_MOTOR_RIGHT.setInverted(true);
