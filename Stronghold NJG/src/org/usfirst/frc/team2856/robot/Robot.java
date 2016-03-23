@@ -27,7 +27,7 @@ public class Robot extends IterativeRobot {
 	 * ready, causing the robot to be bypassed in a match.
 	 */
 	public void robotInit() {
-		RobotMap.init();
+		RobotMap.init();  // Must initialize first
 		
 		drive = new DriveSys();
 		intake = new IntakeSys();
@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 	 * disabled mode. (50 Hz)
 	 */
 	public void disabledPeriodic() {
-		disa.periodic();
+		disa.periodic(false);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
 	 * autonomous mode. (50 Hz)
 	 */
 	public void autonomousPeriodic() {
-		auto.periodic();
+		auto.periodic(false);
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Robot extends IterativeRobot {
 	 * teleop mode. (50 Hz)
 	 */
 	public void teleopPeriodic() {
-		tele.periodic();
+		tele.periodic(false);
 	}
 
 	/**
@@ -94,6 +94,6 @@ public class Robot extends IterativeRobot {
 	 * test mode. (50 Hz)
 	 */
 	public void testPeriodic() {
-		tele.periodic();
+		tele.periodic(true);
 	}
 }

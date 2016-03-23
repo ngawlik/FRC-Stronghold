@@ -19,28 +19,28 @@ public class Teleop {
 	}
 
 	public void init() {
-		
+		drive.initTele();
 	}
 
-	public void periodic() {
+	public void periodic(boolean debug) {
 		drive.arcadeDrive(joystick.getY(), joystick.getX());
 		
 		double effort = 0;
 		if (joystick.getRawButton(5))
 		{
-			effort = 0.2;
+			effort = -1.0;
 		}
 		else if (joystick.getRawButton(3))
 		{
-			effort = 1.0;
+			effort = -0.25;
 		}
 		else if (joystick.getRawButton(6))
 		{
-			effort = -0.2;
+			effort = 1.0;
 		}
 		else if (joystick.getRawButton(4))
 		{
-			effort = -1.0;
+			effort = 0.25;
 		}
         intake.setEffort(effort);
         

@@ -14,7 +14,7 @@ public class Disabled {
 		intake.stop();
 	}
 
-	public void periodic() {
+	public void periodic(boolean debug) {
 		
 	}
 }

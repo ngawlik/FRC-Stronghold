@@ -8,15 +8,14 @@ public class Autonomous {
 		drive = driveObj;
 		intake = intakeObj;
 		
-		drive.placeholder();
 		intake.placeholder();
 	}
 
 	public void init() {
-		
+		drive.initAuto();
 	}
 
-	public void periodic() {
+	public void periodic(boolean debug) {
 		
 	}
 }

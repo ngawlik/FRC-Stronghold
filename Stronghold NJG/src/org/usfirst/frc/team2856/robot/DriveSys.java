@@ -7,6 +7,10 @@ public class DriveSys {
 	
 	public DriveSys() {
 		robotDrive = new RobotDrive(RobotMap.DRIVE_MOTOR_LEFT, RobotMap.DRIVE_MOTOR_RIGHT);
+		
+		RobotMap.DRIVE_ENCODER_LEFT.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DIST_PER_PULSE);
+		RobotMap.DRIVE_ENCODER_RIGHT.setDistancePerPulse(RobotMap.DRIVE_ENCODER_DIST_PER_PULSE);
+		RobotMap.DRIVE_GYRO.setSensitivity(RobotMap.DRIVE_GYRO_SENSITIVITY);
 	}
 
 	public void placeholder() {
@@ -36,6 +40,16 @@ public class DriveSys {
 	public void encoderReset() {
 		RobotMap.DRIVE_ENCODER_LEFT.reset();
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();
+	}
+
+	public void initAuto() {
+		RobotMap.DRIVE_MOTOR_LEFT.setInverted(RobotMap.DRIVE_MOTOR_LEFT_AUTO_DIR);
+		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_AUTO_DIR);
+	}
+
+	public void initTele() {
+		RobotMap.DRIVE_MOTOR_LEFT.setInverted(RobotMap.DRIVE_MOTOR_LEFT_TELE_DIR);
+		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
 
 	public void stop() {
