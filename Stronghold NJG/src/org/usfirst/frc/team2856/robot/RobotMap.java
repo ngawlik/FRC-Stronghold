@@ -16,7 +16,7 @@ public class RobotMap {
 	public static SpeedController INTAKE_MOTOR;
 	
 	public static final double DRIVE_ENCODER_DIST_PER_PULSE = 0.003522;  // (feet/count)
-	public static final double DRIVE_GYRO_SENSITIVITY = 1.0;  // (volts/(degree/second))
+	public static final double DRIVE_GYRO_SENSITIVITY = 0.007;  // (volts/(degree/second))
 	public static final boolean DRIVE_MOTOR_LEFT_AUTO_DIR = true;
 	public static final boolean DRIVE_MOTOR_LEFT_TELE_DIR = true;
 	public static final boolean DRIVE_MOTOR_RIGHT_AUTO_DIR = true;

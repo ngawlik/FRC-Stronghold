@@ -42,6 +42,18 @@ public class DriveSys {
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();
 	}
 
+	public double gyroGetAngle() {
+		return RobotMap.DRIVE_GYRO.getAngle();
+	}
+
+	public double gyroGetRate() {
+		return RobotMap.DRIVE_GYRO.getRate();
+	}
+
+	public void gyroReset() {
+		RobotMap.DRIVE_GYRO.reset();
+	}
+
 	public void initAuto() {
 		RobotMap.DRIVE_MOTOR_LEFT.setInverted(RobotMap.DRIVE_MOTOR_LEFT_AUTO_DIR);
 		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_AUTO_DIR);

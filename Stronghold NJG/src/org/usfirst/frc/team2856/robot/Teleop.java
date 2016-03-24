@@ -8,6 +8,8 @@ public class Teleop {
 	private DriveSys drive;
 	private IntakeSys intake;
 	private Joystick joystick;
+	private boolean button9PrevValue;
+	private boolean button10PrevValue;
 	private boolean button11PrevValue;
 	private boolean button12PrevValue;
 
@@ -44,6 +46,22 @@ public class Teleop {
 		}
         intake.setEffort(effort);
         
+    	boolean button9Value = joystick.getRawButton(9);
+    	if (button9Value && !button9PrevValue)
+    	{
+    		double angle = drive.gyroGetAngle();
+    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
+    	}
+    	button9PrevValue = button9Value;
+
+    	boolean button10Value = joystick.getRawButton(10);
+    	if (button10Value && !button10PrevValue)
+    	{
+    		drive.gyroReset();
+    		System.out.println("Drive Gyro Reset");
+    	}
+    	button10PrevValue = button10Value;
+
     	boolean button11Value = joystick.getRawButton(11);
     	if (button11Value && !button11PrevValue)
     	{
