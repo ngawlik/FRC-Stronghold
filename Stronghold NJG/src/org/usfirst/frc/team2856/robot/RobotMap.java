@@ -8,19 +8,44 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
 public class RobotMap {
-	public static AnalogGyro DRIVE_GYRO;
-	public static Encoder DRIVE_ENCODER_LEFT;
-	public static Encoder DRIVE_ENCODER_RIGHT;
-	public static SpeedController DRIVE_MOTOR_LEFT;
-	public static SpeedController DRIVE_MOTOR_RIGHT;
-	public static SpeedController INTAKE_MOTOR;
+	public static final String NT_SOURCE = "SmartDashboard"; // Network table
+	public static final double PERIODIC_UPDATE_PERIOD = 0.020; // Periodic update period (s)
 	
-	public static final double DRIVE_ENCODER_DIST_PER_PULSE = 0.003522;  // (feet/count)
-	public static final double DRIVE_GYRO_SENSITIVITY = 0.007;  // (volts/(degree/second))
-	public static final boolean DRIVE_MOTOR_LEFT_AUTO_DIR = true;
-	public static final boolean DRIVE_MOTOR_LEFT_TELE_DIR = true;
-	public static final boolean DRIVE_MOTOR_RIGHT_AUTO_DIR = true;
-	public static final boolean DRIVE_MOTOR_RIGHT_TELE_DIR = true;
+	// Drive system directions
+	public static final boolean
+		DRIVE_MOTOR_LEFT_AUTO_DIR = true,
+		DRIVE_MOTOR_LEFT_TELE_DIR = true,
+		DRIVE_MOTOR_RIGHT_AUTO_DIR = true,
+		DRIVE_MOTOR_RIGHT_TELE_DIR = true;
+
+	// Drive system parameters
+	public static final int
+		DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
+	public static final double
+		DRIVE_ACCEL_RATE = 5.0,				// (ft/s^2)
+		DRIVE_ENCODER_RESOLUTION = 0.003522,// (feet/count)
+		DRIVE_GYRO_SENSITIVITY = 0.007,		// (volts/(degree/second))
+		DRIVE_PID_EFFORT_MAX = 0.5,			// (0-1)
+		DRIVE_PID_PERIOD = 0.010,			// (s)
+		DRIVE_PID_POS_SETTLE = 0.25,		// (s)
+		DRIVE_SPEED_MAX = 2;				// (ft/s)
+
+	// Drive system PID Parameters
+	public static final double
+		DRIVE_PID_POSITION_KP = 2.00,
+		DRIVE_PID_POSITION_KI = 0.01,
+		DRIVE_PID_POSITION_KD = 1.00;
+
+	// Object declarations
+	public static AnalogGyro
+		DRIVE_GYRO;
+	public static Encoder
+		DRIVE_ENCODER_LEFT,
+		DRIVE_ENCODER_RIGHT;
+	public static SpeedController
+		DRIVE_MOTOR_LEFT,
+		DRIVE_MOTOR_RIGHT,
+		INTAKE_MOTOR;
 
 	public static void init() {
 		// Analog In (0-3, 4-7)
