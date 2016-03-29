@@ -10,10 +10,14 @@ import edu.wpi.first.wpilibj.Talon;
 public class RobotMap {
 	public static final String NT_SOURCE = "SmartDashboard"; // Network table
 	public static final double PERIODIC_UPDATE_PERIOD = 0.020; // Periodic update period (s)
-	
+
+	// Autonomous
+	public static final double
+		AUTO_DIST = 3.0;					// (feet)
+
 	// Drive system directions
 	public static final boolean
-		DRIVE_MOTOR_LEFT_AUTO_DIR = true,
+		DRIVE_MOTOR_LEFT_AUTO_DIR = false,
 		DRIVE_MOTOR_LEFT_TELE_DIR = true,
 		DRIVE_MOTOR_RIGHT_AUTO_DIR = true,
 		DRIVE_MOTOR_RIGHT_TELE_DIR = true;
@@ -28,13 +32,23 @@ public class RobotMap {
 		DRIVE_PID_EFFORT_MAX = 0.5,			// (0-1)
 		DRIVE_PID_PERIOD = 0.010,			// (s)
 		DRIVE_PID_POS_SETTLE = 0.25,		// (s)
-		DRIVE_SPEED_MAX = 2;				// (ft/s)
+		DRIVE_SPEED_MAX = 2.5;				// (ft/s)
 
 	// Drive system PID Parameters
 	public static final double
 		DRIVE_PID_POSITION_KP = 2.00,
 		DRIVE_PID_POSITION_KI = 0.01,
 		DRIVE_PID_POSITION_KD = 1.00;
+
+	// Power channels
+	public static final int
+		DRIVE_POWER_LEFT_FRONT = 0,
+		DRIVE_POWER_RIGHT_FRONT = 1,
+		DRIVE_POWER_LEFT_REAR = 2,
+		DRIVE_POWER_RIGHT_REAR = 3,
+		CAMERA_POWER = 4,
+		VRM_POWER = 5,
+		INTAKE_POWER = 15;
 
 	// Object declarations
 	public static AnalogGyro

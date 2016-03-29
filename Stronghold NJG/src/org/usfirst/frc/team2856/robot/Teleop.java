@@ -81,5 +81,7 @@ public class Teleop {
     		System.out.println("Drive Encoder Reset");
     	}
     	button12PrevValue = button12Value;
+    	
+    	drive.update(debug);
 	}
 }

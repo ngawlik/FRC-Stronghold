@@ -28,25 +28,25 @@ public class MoveRefGen {
 		moveState = MoveState.Idle;
 	}
 	
-	public void Configure(double accelRate, double maxSpeed, double settleTime) {
+	public void configure(double accelRate, double maxSpeed, double settleTime) {
 		this.accelRate = accelRate;
 		this.maxSpeed = maxSpeed;
 		this.settleTime = settleTime;
 	}
 
-	public double GetRefPosition() {
+	public double getRefPosition() {
 		return direction * refDist;
 	}
 
-	public double GetRefVelocity() {
+	public double getRefVelocity() {
 		return direction * refSpeed;
 	}
 
-	public boolean IsActive() {
+	public boolean isActive() {
 		return moveState != MoveState.Idle;
 	}
 
-	public void Start(double distance) {
+	public void start(double distance) {
 		double decelDist;
 		
 		if (distance != 0)
@@ -73,12 +73,12 @@ public class MoveRefGen {
 		}
 	}
 
-	public void Stop() {
+	public void stop() {
 		refSpeed = 0;
 		moveState = MoveState.Idle;
 	}
 
-	public void Update() {
+	public void update() {
 		switch (moveState) {
 			case Idle:
 				// Do nothing

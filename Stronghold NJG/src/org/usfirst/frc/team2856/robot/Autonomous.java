@@ -13,9 +13,10 @@ public class Autonomous {
 
 	public void init() {
 		drive.initAuto();
+		drive.moveStart(RobotMap.AUTO_DIST);
 	}
 
 	public void periodic(boolean debug) {
-		
+		drive.update(debug);
 	}
 }
