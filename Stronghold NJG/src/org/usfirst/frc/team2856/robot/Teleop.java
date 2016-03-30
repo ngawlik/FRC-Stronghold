@@ -26,6 +26,7 @@ public class Teleop {
 
 	public void periodic(boolean debug) {
 		drive.arcadeDrive(joystick.getY(), joystick.getX());
+		//drive.arcadeDrive(joystick.getY(), joystick.getX(), joystick.getRawButton(1));
 		
 		double effort = 0;
 		if (joystick.getRawButton(5))

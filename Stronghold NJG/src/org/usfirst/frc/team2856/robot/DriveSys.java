@@ -69,6 +69,40 @@ public class DriveSys {
 		robotDrive.arcadeDrive(moveValue, rotateValue, true);
 	}
 
+//	public void arcadeDrive(double yValue, double xValue, boolean useGyro) {
+//		if (useGyro)
+//		{// Field-oriented driving - integrator needed?
+//			double moveValue, rotateValue;
+//			double magnitude = Math.sqrt(Math.pow(yValue, 2) + Math.pow(xValue, 2));
+//			if (magnitude != 0)
+//			{
+//				double angleCord = (magnitude != 0) ? Math.atan2(xValue, -yValue) : 0;
+//				double angleGyro = Math.toRadians(RobotMap.DRIVE_GYRO.getAngle());
+//				double angleTheta = angleCord - angleGyro;
+//				moveValue = -magnitude * Math.cos(angleTheta);
+//				rotateValue = magnitude * Math.sin(angleTheta);
+//				
+//				table.putNumber("Drive.yValue", yValue);
+//				table.putNumber("Drive.xValue", xValue);
+//				table.putNumber("Drive.angleCord", Math.toDegrees(angleCord));
+//				table.putNumber("Drive.angleGyro", Math.toDegrees(angleGyro));
+//				table.putNumber("Drive.angleTheta", Math.toDegrees(angleTheta));
+//				table.putNumber("Drive.moveValue", moveValue);
+//				table.putNumber("Drive.rotateValue", rotateValue);
+//			}
+//			else
+//			{
+//				moveValue = 0;
+//				rotateValue = 0;
+//			}
+//			robotDrive.arcadeDrive(moveValue, rotateValue, false);
+//		}
+//		else
+//		{// Robot-oriented driving
+//			robotDrive.arcadeDrive(yValue, xValue, true);
+//		}
+//	}
+
 	public double encoderGetDistLeft() {
 		return RobotMap.DRIVE_ENCODER_LEFT.getDistance();
 	}
