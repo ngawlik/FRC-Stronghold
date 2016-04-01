@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
 	 * autonomous mode. (50 Hz)
 	 */
 	public void autonomousPeriodic() {
-		auto.periodic(true);
+		auto.periodic(false);
 	}
 
 	/**
