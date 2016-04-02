@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
+//	private ClimbSys climb;
 	private DriveSys drive;
 	private IntakeSys intake;
 
@@ -29,12 +30,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init();  // Must initialize first
 		
+//		climb = new ClimbSys();
 		drive = new DriveSys();
 		intake = new IntakeSys();
 		
 		auto = new Autonomous(drive, intake);
-		disa = new Disabled(drive, intake);
-		tele = new Teleop(drive, intake);
+		disa = new Disabled(drive, intake/*, climb*/);
+		tele = new Teleop(drive, intake/*, climb*/);
 	}
 
 	/**

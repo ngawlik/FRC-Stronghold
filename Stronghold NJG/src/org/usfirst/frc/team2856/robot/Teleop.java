@@ -4,20 +4,22 @@ package org.usfirst.frc.team2856.robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Teleop {
+//	private ClimbSys climb;
 //	private DriverStation ds;
 	private DriveSys drive;
 	private IntakeSys intake;
 	private Joystick joystick;
 	private Joystick xbox;
-	private boolean button6PrevValue;
-	private boolean button7PrevValue;
+//	private boolean button6PrevValue;
+//	private boolean button7PrevValue;
 	private boolean button10PrevValue;
 	private boolean button11PrevValue;
 
-	public Teleop(DriveSys driveObj, IntakeSys intakeObj) {
+	public Teleop(DriveSys driveObj, IntakeSys intakeObj/*, ClimbSys climbObj*/) {
 //		ds = DriverStation.getInstance();
 		drive = driveObj;
 		intake = intakeObj;
+//		climb = climbObj;
 		joystick = new Joystick(0);
 		xbox = new Joystick(1);
 	}
@@ -37,8 +39,6 @@ public class Teleop {
 			// Full effort
 			drive.arcadeDrive(joystick.getY(), joystick.getX());
 		}
-		// Field-oriented (requires gyro)
-		//drive.arcadeDrive(joystick.getY(), joystick.getX(), joystick.getRawButton(1));
 		
 		double effort = 0;
 		// In, fast
@@ -46,11 +46,16 @@ public class Teleop {
 		{
 			effort = -1.0;
 		}
-		// In, slow
+		// In, slow - fixed
 		else if (joystick.getRawButton(2) || xbox.getRawButton(1)) //3
 		{
 			effort = -0.25;
 		}
+		// In, slow - variable (left xBox)
+//		else if (xbox.getRawAxis(3) < -0.1)
+//		{
+//			effort = 0.25 * xbox.getRawAxis(3);
+//		}
 		// Out, fast
 		else if (joystick.getRawButton(3) || xbox.getRawButton(4)) //6
 		{
@@ -61,23 +66,28 @@ public class Teleop {
 		{
 			effort = 0.25;
 		}
+//		// Out, slow - variable (right xBox)
+//		else if (xbox.getRawAxis(3) > 0.1)
+//		{
+//			effort = 0.25 * xbox.getRawAxis(3);
+//		}
         intake.setEffort(effort);
         
-    	boolean button7Value = joystick.getRawButton(7); //9
-    	if (button7Value && !button7PrevValue)
-    	{
-    		double angle = drive.gyroGetAngle();
-    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
-    	}
-    	button7PrevValue = button7Value;
+//    	boolean button7Value = joystick.getRawButton(7); //9
+//    	if (button7Value && !button7PrevValue)
+//    	{
+//    		double angle = drive.gyroGetAngle();
+//    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
+//    	}
+//    	button7PrevValue = button7Value;
 
-    	boolean button6Value = joystick.getRawButton(6); //10
-    	if (button6Value && !button6PrevValue)
-    	{
-    		drive.gyroReset();
-    		System.out.println("Drive Gyro Reset");
-    	}
-    	button6PrevValue = button6Value;
+//    	boolean button6Value = joystick.getRawButton(6); //10
+//    	if (button6Value && !button6PrevValue)
+//    	{
+//    		drive.gyroReset();
+//    		System.out.println("Drive Gyro Reset");
+//    	}
+//    	button6PrevValue = button6Value;
 
     	boolean button10Value = joystick.getRawButton(10); //11
     	if (button10Value && !button10PrevValue)
@@ -99,6 +109,30 @@ public class Teleop {
     	}
     	button11PrevValue = button11Value;
     	
+//    	// Arm (xBox rightY)
+//    	double axisValueArm = xbox.getRawAxis(5);
+//    	if (!xbox.getRawButton(6) || ((axisValueArm > -0.1) && (axisValueArm < 0.1)))
+//    	{
+//    		axisValueArm = 0;
+//    	}
+//    	climb.setArmEffort(axisValueArm);
+    	
+//    	// Lift (xBox leftY)
+//    	double axisValueLift = xbox.getRawAxis(2);
+//    	if (!xbox.getRawButton(5) || ((axisValueLift > -0.1) && (axisValueLift < 0.1)))
+//    	{
+//    		axisValueLift = 0;
+//    	}
+//    	climb.setLiftEffort(axisValueLift);
+
     	drive.update(debug);
 	}
 }
+
+// Xbox Axis
+//  1-leftX
+//  2-leftY
+//  3-trig right-left
+//  4-rightX
+//  5-rightY
+//  6-Dpad Left/Right

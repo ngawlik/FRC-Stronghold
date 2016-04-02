@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2856.robot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+//import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 //import edu.wpi.first.wpilibj.Jaguar;
@@ -52,8 +52,8 @@ public class RobotMap {
 		INTAKE_POWER = 15;
 
 	// Object declarations
-	public static AnalogGyro
-		DRIVE_GYRO;
+//	public static AnalogGyro
+//		DRIVE_GYRO;
 	public static Encoder
 		DRIVE_ENCODER_LEFT,
 		DRIVE_ENCODER_RIGHT;
@@ -61,10 +61,12 @@ public class RobotMap {
 		DRIVE_MOTOR_LEFT,
 		DRIVE_MOTOR_RIGHT,
 		INTAKE_MOTOR;
+//		CLIMB_MOTOR_ARM,
+//		CLIMB_MOTOR_LIFT;
 
 	public static void init() {
 		// Analog In (0-3, 4-7)
-		DRIVE_GYRO = new AnalogGyro(0);
+//		DRIVE_GYRO = new AnalogGyro(0);
 		
 		// Analog Out (none, 0-1)
 		
@@ -76,6 +78,8 @@ public class RobotMap {
 		DRIVE_MOTOR_LEFT = new Victor(0); //Jaguar
 		DRIVE_MOTOR_RIGHT = new Victor(1); //Jaguar
 		INTAKE_MOTOR = new Victor(2); //Talon
+//		CLIMB_MOTOR_ARM = new Victor(3);
+//		CLIMB_MOTOR_LIFT = new Victor(4);
 		
 		// Relay (0-3, none)
 	}
