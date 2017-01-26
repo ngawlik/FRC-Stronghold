@@ -3,10 +3,10 @@ package org.usfirst.frc.team2856.robot;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedController;
-//import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
+//import edu.wpi.first.wpilibj.Victor;
 
 public class RobotMap {
 	public static final String NT_SOURCE = "SmartDashboard"; // Network table
@@ -67,20 +67,26 @@ public class RobotMap {
 	public static void init() {
 		// Analog In (0-3, 4-7)
 //		DRIVE_GYRO = new AnalogGyro(0);
-		
+
 		// Analog Out (none, 0-1)
-		
+
 		// DIO (0-9, 10-25)
 		DRIVE_ENCODER_LEFT = new Encoder(0, 1, true, EncodingType.k4X);
 		DRIVE_ENCODER_RIGHT = new Encoder(2, 3, false, EncodingType.k4X);
-		
+
 		// PWM (0-9, 10-19)
-		DRIVE_MOTOR_LEFT = new Victor(0); //Jaguar
-		DRIVE_MOTOR_RIGHT = new Victor(1); //Jaguar
-		INTAKE_MOTOR = new Victor(2); //Talon
+		// 2016 Robot
+//		DRIVE_MOTOR_LEFT = new Victor(0);
+//		DRIVE_MOTOR_RIGHT = new Victor(1);
+//		INTAKE_MOTOR = new Victor(2);
 //		CLIMB_MOTOR_ARM = new Victor(3);
 //		CLIMB_MOTOR_LIFT = new Victor(4);
-		
+
+		// Wood Robot
+		DRIVE_MOTOR_LEFT = new Jaguar(0);
+		DRIVE_MOTOR_RIGHT = new Jaguar(1);
+		INTAKE_MOTOR = new Talon(2);
+
 		// Relay (0-3, none)
 	}
 }

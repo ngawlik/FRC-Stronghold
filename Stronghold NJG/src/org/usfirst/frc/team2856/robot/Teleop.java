@@ -9,7 +9,7 @@ public class Teleop {
 	private DriveSys drive;
 	private IntakeSys intake;
 	private Joystick joystick;
-	private Joystick xbox;
+//	private Joystick xbox;
 //	private boolean button6PrevValue;
 //	private boolean button7PrevValue;
 	private boolean button10PrevValue;
@@ -21,7 +21,7 @@ public class Teleop {
 		intake = intakeObj;
 //		climb = climbObj;
 		joystick = new Joystick(0);
-		xbox = new Joystick(1);
+//		xbox = new Joystick(1);
 	}
 
 	public void init() {
@@ -42,12 +42,12 @@ public class Teleop {
 		
 		double effort = 0;
 		// In, fast
-		if (joystick.getRawButton(4) || xbox.getRawButton(2)) //5
+		if (joystick.getRawButton(4)/* || xbox.getRawButton(2)*/) //5
 		{
 			effort = -1.0;
 		}
 		// In, slow - fixed
-		else if (joystick.getRawButton(2) || xbox.getRawButton(1)) //3
+		else if (joystick.getRawButton(2)/* || xbox.getRawButton(1)*/) //3
 		{
 			effort = -0.25;
 		}
@@ -57,12 +57,12 @@ public class Teleop {
 //			effort = 0.25 * xbox.getRawAxis(3);
 //		}
 		// Out, fast
-		else if (joystick.getRawButton(3) || xbox.getRawButton(4)) //6
+		else if (joystick.getRawButton(3)/* || xbox.getRawButton(4)*/) //6
 		{
 			effort = 1.0;
 		}
 		// Out, slow
-		else if (joystick.getRawButton(5) || xbox.getRawButton(3)) //4
+		else if (joystick.getRawButton(5)/* || xbox.getRawButton(3)*/) //4
 		{
 			effort = 0.25;
 		}
