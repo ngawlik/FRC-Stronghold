@@ -137,11 +137,19 @@ public class DriveSys {
 //	}
 
 	public void initAuto() {
+		// Disable user watchdog (since RobotDrive will not be called)
+		robotDrive.setSafetyEnabled(false);
+
+		// Set motor drive directions (both forward)
 		RobotMap.DRIVE_MOTOR_LEFT.setInverted(RobotMap.DRIVE_MOTOR_LEFT_AUTO_DIR);
 		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_AUTO_DIR);
 	}
 
 	public void initTele() {
+		// Enable user watchdog (default when using RobotDrive)
+		robotDrive.setSafetyEnabled(true);
+
+		// Set motor drive directions (left backward, right forward)
 		RobotMap.DRIVE_MOTOR_LEFT.setInverted(RobotMap.DRIVE_MOTOR_LEFT_TELE_DIR);
 		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
@@ -178,9 +186,6 @@ public class DriveSys {
 		leftPID.setSetpoint(leftInitialPos);
 		rightPID.setSetpoint(rightInitialPos);
 
-		// Disable user watchdog
-		robotDrive.setSafetyEnabled(false);
-
 		// Enable PID controllers
 		leftPID.enable();
 		rightPID.enable();
@@ -195,9 +200,6 @@ public class DriveSys {
 		// Disable PID controllers
 		leftPID.disable();
 		rightPID.disable();
-
-		// enable user watchdog
-		robotDrive.setSafetyEnabled(true); 
 
 		// Position move finished
 		moveActive = false;

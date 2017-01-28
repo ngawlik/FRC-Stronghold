@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
 //		climb = new ClimbSys();
 		drive = new DriveSys();
 		intake = new IntakeSys();
-		vision = new VisionSys(); vision.Placeholder();
+		vision = new VisionSys(); vision.placeholder();
 		
 		auto = new Autonomous(drive, intake);
 		disa = new Disabled(drive, intake/*, climb*/);

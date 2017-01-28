@@ -51,7 +51,7 @@ public class VisionSys {
 		visionThread.start();		
 	}
 	
-	public void Placeholder() {
+	public void placeholder() {
 		
 	}
 }

@@ -14,7 +14,7 @@ public class RobotMap {
 
 	// Autonomous
 	public static final double
-		AUTO_DIST = 15.0;					// (feet)
+		AUTO_DIST = 1.0;					// (feet) 15.0
 
 	// Drive system directions
 	public static final boolean
@@ -27,19 +27,19 @@ public class RobotMap {
 	public static final int
 		DRIVE_ENC_SAMPLES_TO_AVERAGE = 4;
 	public static final double
-		DRIVE_ACCEL_RATE = 5.0,				// (ft/s^2)
-		DRIVE_ENCODER_RESOLUTION = 0.003358,// (feet/count) Real: 0.003358, Practice: 0.003522
-		DRIVE_GYRO_SENSITIVITY = 0.007,		// (volts/(degree/second))
-		DRIVE_PID_EFFORT_MAX = 1.0,			// (0-1)
-		DRIVE_PID_PERIOD = 0.010,			// (s)
-		DRIVE_PID_POS_SETTLE = 0.25,		// (s)
-		DRIVE_SPEED_MAX = 5.0;				// (ft/s)
+		DRIVE_ACCEL_RATE = 2.5,				// (ft/s^2) 5.0
+		DRIVE_ENCODER_RESOLUTION = 0.003522,// (feet/count) Real: 0.003358, Practice: 0.003522
+		DRIVE_GYRO_SENSITIVITY = 0.007,		// (volts/(degree/second)) 0.007
+		DRIVE_PID_EFFORT_MAX = 0.5,			// (0-1) 1.0
+		DRIVE_PID_PERIOD = 0.010,			// (s) 0.010
+		DRIVE_PID_POS_SETTLE = 0.25,		// (s) 0.25
+		DRIVE_SPEED_MAX = 2.0;				// (ft/s) 5.0
 
 	// Drive system PID Parameters
 	public static final double
-		DRIVE_PID_POSITION_KP = 2.00,
-		DRIVE_PID_POSITION_KI = 0.01,
-		DRIVE_PID_POSITION_KD = 1.00;
+		DRIVE_PID_POSITION_KP = 2.00,		// 2.00
+		DRIVE_PID_POSITION_KI = 0.01,		// 0.01
+		DRIVE_PID_POSITION_KD = 1.00;		// 1.00
 
 	// Power channels
 	public static final int
