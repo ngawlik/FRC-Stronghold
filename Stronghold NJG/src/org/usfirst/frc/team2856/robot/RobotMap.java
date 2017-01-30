@@ -14,7 +14,7 @@ public class RobotMap {
 
 	// Autonomous
 	public static final double
-		AUTO_DIST = 1.0;					// (feet) 15.0
+		AUTO_DIST = 3.0;					// (feet) 15.0
 
 	// Drive system directions
 	public static final boolean
