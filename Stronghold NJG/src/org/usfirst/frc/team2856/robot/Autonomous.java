@@ -1,40 +1,69 @@
 package org.usfirst.frc.team2856.robot;
 
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Autonomous {
 	private DriveSys drive;
-	private IntakeSys intake;
 
-	// Chooser
-	final String defaultAuto = "Default";
-	final String customAuto = "My Auto";
-	String autoSelected;
-//	SendableChooser<String> chooser;
+	private String autoSelected;
+	private Integer state;
 
-	public Autonomous(DriveSys driveObj, IntakeSys intakeObj) {
+	public Autonomous(DriveSys driveObj) {
 		drive = driveObj;
-		intake = intakeObj; intake.placeholder();
-
-		// Chooser
-//		chooser = new SendableChooser<>();
-//		chooser.addDefault("Default Auto", defaultAuto);
-//		chooser.addObject("My Auto", customAuto);
-//		SmartDashboard.putData("Auto choices", chooser);
 	}
 
 	public void init() {
-		// Chooser
-//		autoSelected = chooser.getSelected();
-		autoSelected = SmartDashboard.getString("Auto Selector", defaultAuto);
+		autoSelected = SmartDashboard.getString("Auto Selector", "None");
 		System.out.println("Auto selected: " + autoSelected);
+		state = 0;
 
 		drive.initAuto();
-		drive.moveStart(RobotMap.AUTO_DIST);
+		stateMachine();
 	}
 
 	public void periodic(boolean debug) {
+		stateMachine();
 		drive.update(debug);
+	}
+
+	private void stateMachine() {
+		switch(autoSelected) {
+			case "Forward":
+				switch(state) {
+					case 0:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStart(RobotMap.AUTO_DIST);
+							state++;
+						}
+						break;
+					default:
+						break;
+				}
+				break;
+			case "FwdRev":
+				switch(state) {
+					case 0:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStart(RobotMap.AUTO_DIST);
+							state++;
+						}
+						break;
+					case 1:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStart(-RobotMap.AUTO_DIST);
+							state++;
+						}
+						break;
+					default:
+						break;
+				}
+				break;
+			default:
+				// No match found, do nothing
+				break;
+		}
 	}
 }

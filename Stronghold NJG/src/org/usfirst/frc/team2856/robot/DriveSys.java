@@ -154,6 +154,10 @@ public class DriveSys {
 		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
 
+	public boolean moveGetActive() {
+		return moveActive;
+	}
+	
 	public void moveStart(double distance) {
 		double Kp, Ki, Kd;
 		double accelRate;
