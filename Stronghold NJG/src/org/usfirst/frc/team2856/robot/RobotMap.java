@@ -33,7 +33,8 @@ public class RobotMap {
 		DRIVE_PID_EFFORT_MAX = 0.5,			// (0-1) 1.0
 		DRIVE_PID_PERIOD = 0.010,			// (s) 0.010
 		DRIVE_PID_POS_SETTLE = 0.25,		// (s) 0.25
-		DRIVE_SPEED_MAX = 2.0;				// (ft/s) 5.0
+		DRIVE_SPEED_MAX = 2.0,				// (ft/s) 5.0
+		DRIVE_BASE_WIDTH = (23.5 / 12.0);	// (ft)
 
 	// Drive system PID Parameters
 	public static final double

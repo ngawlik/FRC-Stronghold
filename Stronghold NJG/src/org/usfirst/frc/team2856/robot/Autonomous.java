@@ -33,7 +33,7 @@ public class Autonomous {
 					case 0:
 						if(!drive.moveGetActive())
 						{
-							drive.moveStart(RobotMap.AUTO_DIST);
+							drive.moveStraight(RobotMap.AUTO_DIST);
 							state++;
 						}
 						break;
@@ -46,14 +46,27 @@ public class Autonomous {
 					case 0:
 						if(!drive.moveGetActive())
 						{
-							drive.moveStart(RobotMap.AUTO_DIST);
+							drive.moveStraight(RobotMap.AUTO_DIST);
 							state++;
 						}
 						break;
 					case 1:
 						if(!drive.moveGetActive())
 						{
-							drive.moveStart(-RobotMap.AUTO_DIST);
+							drive.moveStraight(-RobotMap.AUTO_DIST);
+							state++;
+						}
+						break;
+					default:
+						break;
+				}
+				break;
+			case "Turn":
+				switch(state) {
+					case 0:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(360.0, 3.0);
 							state++;
 						}
 						break;

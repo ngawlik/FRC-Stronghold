@@ -12,6 +12,7 @@ public class DriveSys {
 	private PowerDistributionPanel power;
 	private NetworkTable table;
 	
+	private double leftMultiplier, rightMultiplier;
 	private double leftInitialPos, rightInitialPos;
 	private boolean moveActive;
 	private MoveRefGen refGen;
@@ -158,7 +159,7 @@ public class DriveSys {
 		return moveActive;
 	}
 	
-	public void moveStart(double distance) {
+	private void moveStart(double distance) {
 		double Kp, Ki, Kd;
 		double accelRate;
 		double maxSpeed;
@@ -200,6 +201,40 @@ public class DriveSys {
 		moveActive = true;
 	}
 
+	public void moveStraight(double distance) {
+		leftMultiplier = 1.0;
+		rightMultiplier = 1.0;
+		moveStart(distance);
+	}
+
+	public void moveTurn(double angle, double radius) {
+		double leftRadius, rightRadius;
+		double fullRadius, distance;
+		
+		if(angle < 0.0)
+		{
+			leftRadius = radius - RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			rightRadius = radius + RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			fullRadius = rightRadius;
+			leftMultiplier = leftRadius / fullRadius;
+			rightMultiplier = 1.0;
+		}
+		else if(angle > 0.0)
+		{
+			leftRadius = radius + RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			rightRadius = radius - RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			fullRadius = leftRadius;
+			leftMultiplier = 1.0;
+			rightMultiplier = rightRadius/fullRadius;
+		}
+		else
+		{
+			return;
+		}
+		distance = (angle / 360.0) * 2.0 * Math.PI * fullRadius;
+		moveStart(distance);
+	}
+
 	public void moveStop() {
 		// Disable PID controllers
 		leftPID.disable();
@@ -221,8 +256,8 @@ public class DriveSys {
 			if (refGen.isActive())
 			{
 				double refPos = refGen.getRefPosition();
-				leftPID.setSetpoint(refPos + leftInitialPos);
-				rightPID.setSetpoint(refPos + rightInitialPos);
+				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
+				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
 			}
 			else
 			{
