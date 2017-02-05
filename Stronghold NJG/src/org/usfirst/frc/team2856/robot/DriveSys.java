@@ -211,25 +211,21 @@ public class DriveSys {
 		double leftRadius, rightRadius;
 		double fullRadius, distance;
 		
-		if(angle < 0.0)
+		if(radius < 0.0)
 		{
-			leftRadius = radius - RobotMap.DRIVE_BASE_WIDTH / 2.0;
-			rightRadius = radius + RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			leftRadius = -radius - RobotMap.DRIVE_BASE_WIDTH / 2.0;
+			rightRadius = -radius + RobotMap.DRIVE_BASE_WIDTH / 2.0;
 			fullRadius = rightRadius;
 			leftMultiplier = leftRadius / fullRadius;
 			rightMultiplier = 1.0;
 		}
-		else if(angle > 0.0)
+		else
 		{
 			leftRadius = radius + RobotMap.DRIVE_BASE_WIDTH / 2.0;
 			rightRadius = radius - RobotMap.DRIVE_BASE_WIDTH / 2.0;
 			fullRadius = leftRadius;
 			leftMultiplier = 1.0;
 			rightMultiplier = rightRadius/fullRadius;
-		}
-		else
-		{
-			return;
 		}
 		distance = (angle / 360.0) * 2.0 * Math.PI * fullRadius;
 		moveStart(distance);

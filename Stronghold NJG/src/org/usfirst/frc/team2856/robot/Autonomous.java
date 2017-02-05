@@ -61,12 +61,108 @@ public class Autonomous {
 						break;
 				}
 				break;
+			case "Line":
+				switch(state) {
+					case 0:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(6.0);
+							state++;
+						}
+						break;
+					case 1:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(180.0, 0.0);
+							state++;
+						}
+						break;
+					case 2:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(6.0);
+							state++;
+						}
+						break;
+					case 3:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(-180.0, 0.0);
+							state++;
+						}
+						break;
+					default:
+						break;
+				}
+				break;
+			case "Square":
+				switch(state) {
+					case 0:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(3.0);
+							state++;
+						}
+						break;
+					case 1:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(90.0, 2.0);
+							state++;
+						}
+						break;
+					case 2:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(3.0);
+							state++;
+						}
+						break;
+					case 3:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(90.0, 2.0);
+							state++;
+						}
+						break;
+					case 4:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(3.0);
+							state++;
+						}
+						break;
+					case 5:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(90.0, 2.0);
+							state++;
+						}
+						break;
+					case 6:
+						if(!drive.moveGetActive())
+						{
+							drive.moveStraight(3.0);
+							state++;
+						}
+						break;
+					case 7:
+						if(!drive.moveGetActive())
+						{
+							drive.moveTurn(90.0, 2.0);
+							state++;
+						}
+						break;
+					default:
+						break;
+				}
+				break;
 			case "Turn":
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(360.0, 3.0);
+							drive.moveTurn(90.0, 0.0);
 							state++;
 						}
 						break;
