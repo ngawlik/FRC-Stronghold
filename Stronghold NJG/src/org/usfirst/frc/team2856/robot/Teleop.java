@@ -10,8 +10,8 @@ public class Teleop {
 	private IntakeSys intake;
 	private Joystick joystick;
 //	private Joystick xbox;
-//	private boolean button6PrevValue;
-//	private boolean button7PrevValue;
+	private boolean button6PrevValue;
+	private boolean button7PrevValue;
 	private boolean button10PrevValue;
 	private boolean button11PrevValue;
 
@@ -49,7 +49,7 @@ public class Teleop {
 		// In, slow - fixed
 		else if (joystick.getRawButton(2)/* || xbox.getRawButton(1)*/) //3
 		{
-			effort = -0.25;
+			effort = -0.50;
 		}
 		// In, slow - variable (left xBox)
 //		else if (xbox.getRawAxis(3) < -0.1)
@@ -64,7 +64,7 @@ public class Teleop {
 		// Out, slow
 		else if (joystick.getRawButton(5)/* || xbox.getRawButton(3)*/) //4
 		{
-			effort = 0.25;
+			effort = 0.50;
 		}
 //		// Out, slow - variable (right xBox)
 //		else if (xbox.getRawAxis(3) > 0.1)
@@ -73,21 +73,21 @@ public class Teleop {
 //		}
         intake.setEffort(effort);
         
-//    	boolean button7Value = joystick.getRawButton(7); //9
-//    	if (button7Value && !button7PrevValue)
-//    	{
-//    		double angle = drive.gyroGetAngle();
-//    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
-//    	}
-//    	button7PrevValue = button7Value;
+    	boolean button7Value = joystick.getRawButton(7); //9
+    	if (button7Value && !button7PrevValue)
+    	{
+    		double angle = drive.gyroGetAngle();
+    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
+    	}
+    	button7PrevValue = button7Value;
 
-//    	boolean button6Value = joystick.getRawButton(6); //10
-//    	if (button6Value && !button6PrevValue)
-//    	{
-//    		drive.gyroReset();
-//    		System.out.println("Drive Gyro Reset");
-//    	}
-//    	button6PrevValue = button6Value;
+    	boolean button6Value = joystick.getRawButton(6); //10
+    	if (button6Value && !button6PrevValue)
+    	{
+    		drive.gyroReset();
+    		System.out.println("Drive Gyro Reset");
+    	}
+    	button6PrevValue = button6Value;
 
     	boolean button10Value = joystick.getRawButton(10); //11
     	if (button10Value && !button10PrevValue)
