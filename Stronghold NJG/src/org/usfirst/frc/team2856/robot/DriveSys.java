@@ -12,8 +12,8 @@ public class DriveSys {
 	private PowerDistributionPanel power;
 	private NetworkTable table;
 	
-	private double leftMultiplier, rightMultiplier;
-	private double leftInitialPos, rightInitialPos;
+	private double leftMultiplier, rightMultiplier, thetaRatio;
+	private double leftInitialPos, rightInitialPos, thetaInitial;
 	private boolean moveActive;
 	private MoveRefGen refGen;
 	private double smallNumber;
@@ -36,6 +36,9 @@ public class DriveSys {
 		
 		// Set gyro sensitivity
 		RobotMap.DRIVE_GYRO.setSensitivity(RobotMap.DRIVE_GYRO_SENSITIVITY);
+		
+		// Calibrate gyro
+		RobotMap.DRIVE_GYRO.calibrate();
 		
 		// Start gyro
 		RobotMap.DRIVE_GYRO.reset();
@@ -158,6 +161,16 @@ public class DriveSys {
 		RobotMap.DRIVE_MOTOR_RIGHT.setInverted(RobotMap.DRIVE_MOTOR_RIGHT_TELE_DIR);
 	}
 
+//	public double irGetDist() {
+//		double dist;
+//		double volt;
+//		
+//		volt = RobotMap.DRIVE_IR.getVoltage();
+//		dist = volt > RobotMap.DRIVE_IR_THRESHOLD ? RobotMap.DRIVE_IR_CONVERSION / volt : RobotMap.DRIVE_IR_MAX_DIST;
+//
+//		return dist;
+//	}
+
 	public boolean moveGetActive() {
 		return moveActive;
 	}
@@ -181,6 +194,7 @@ public class DriveSys {
 		// Latch in initial positions
 		leftInitialPos = RobotMap.DRIVE_ENCODER_LEFT.getDistance();
 		rightInitialPos = RobotMap.DRIVE_ENCODER_RIGHT.getDistance();
+		thetaInitial = gyroGetAngle();
 
         // Set encoders to output position to PID controllers
 		RobotMap.DRIVE_ENCODER_LEFT.setPIDSourceType(PIDSourceType.kDisplacement);
@@ -207,6 +221,7 @@ public class DriveSys {
 	public void moveStraight(double distance) {
 		leftMultiplier = 1.0;
 		rightMultiplier = 1.0;
+		thetaRatio = 0.0;
 		moveStart(distance);
 	}
 
@@ -231,6 +246,7 @@ public class DriveSys {
 			rightMultiplier = rightRadius/fullRadius;
 		}
 		distance = (angle / 360.0) * 2.0 * Math.PI * fullRadius;
+		thetaRatio = angle / distance;
 		moveStart(distance);
 	}
 
@@ -259,6 +275,10 @@ public class DriveSys {
 			if (refGen.isActive())
 			{
 				double refPos = refGen.getRefPosition();
+				double theta = thetaRatio * refPos + thetaInitial;
+				double angleError = gyroGetAngle() - theta;
+				
+				table.putNumber("Drive.AngleError", angleError);
 				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
 				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
 			}
@@ -267,8 +287,6 @@ public class DriveSys {
 				moveStop();
 			}
 		}
-
-//		table.putNumber("Gyro", RobotMap.DRIVE_GYRO.getAngle());
 
 		if (debug)
 		{
@@ -291,6 +309,9 @@ public class DriveSys {
 			// Gyro
 			table.putNumber("Drive.Gyro.Angle", gyroGetAngle() + smallNumber);
 			table.putNumber("Drive.Gyro.Rate", gyroGetRate() + smallNumber);
+			
+//			// IR
+//			table.putNumber("Drive.IR.Dist", irGetDist() + smallNumber);
 			
 			// Ultrasonic
 			table.putNumber("Drive.Ultrasonic.Range", ultrasonicGetRange() + smallNumber);
