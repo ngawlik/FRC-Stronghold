@@ -10,10 +10,10 @@ public class IntakeSys {
 	}
 
 	public void setEffort(double effort) {
-		RobotMap.INTAKE_MOTOR.set(effort);
+//		RobotMap.INTAKE_MOTOR.set(effort);
 	}
 
 	public void stop() {
-		RobotMap.INTAKE_MOTOR.stopMotor();
+//		RobotMap.INTAKE_MOTOR.stopMotor();
 	}
 }

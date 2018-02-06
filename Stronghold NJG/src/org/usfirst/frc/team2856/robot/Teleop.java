@@ -10,8 +10,8 @@ public class Teleop {
 	private IntakeSys intake;
 	private Joystick joystick;
 //	private Joystick xbox;
-	private boolean button6PrevValue;
-	private boolean button7PrevValue;
+//	private boolean button6PrevValue;
+//	private boolean button7PrevValue;
 	private boolean button10PrevValue;
 	private boolean button11PrevValue;
 
@@ -32,12 +32,12 @@ public class Teleop {
 		if (joystick.getRawButton(1))
 		{
 			// Reduced effort
-			drive.arcadeDrive(joystick.getY()/2, joystick.getX()/2);
+			drive.arcadeDrive(joystick.getY()/2, -joystick.getX()/2);
 		}
 		else
 		{
 			// Full effort
-			drive.arcadeDrive(joystick.getY(), joystick.getX());
+			drive.arcadeDrive(joystick.getY(), -joystick.getX());
 		}
 		
 		double effort = 0;
@@ -73,21 +73,21 @@ public class Teleop {
 //		}
         intake.setEffort(effort);
         
-    	boolean button7Value = joystick.getRawButton(7); //9
-    	if (button7Value && !button7PrevValue)
-    	{
-    		double angle = drive.gyroGetAngle();
-    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
-    	}
-    	button7PrevValue = button7Value;
+//    	boolean button7Value = joystick.getRawButton(7); //9
+//    	if (button7Value && !button7PrevValue)
+//    	{
+//    		double angle = drive.gyroGetAngle();
+//    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
+//    	}
+//    	button7PrevValue = button7Value;
 
-    	boolean button6Value = joystick.getRawButton(6); //10
-    	if (button6Value && !button6PrevValue)
-    	{
-    		drive.gyroReset();
-    		System.out.println("Drive Gyro Reset");
-    	}
-    	button6PrevValue = button6Value;
+//    	boolean button6Value = joystick.getRawButton(6); //10
+//    	if (button6Value && !button6PrevValue)
+//    	{
+//    		drive.gyroReset();
+//    		System.out.println("Drive Gyro Reset");
+//    	}
+//    	button6PrevValue = button6Value;
 
     	boolean button10Value = joystick.getRawButton(10); //11
     	if (button10Value && !button10PrevValue)
