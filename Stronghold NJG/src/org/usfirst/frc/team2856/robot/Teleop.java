@@ -12,8 +12,8 @@ public class Teleop {
 //	private Joystick xbox;
 //	private boolean button6PrevValue;
 //	private boolean button7PrevValue;
-	private boolean button10PrevValue;
-	private boolean button11PrevValue;
+	private boolean button3PrevValue;
+	private boolean button4PrevValue;
 
 	public Teleop(DriveSys driveObj, IntakeSys intakeObj/*, ClimbSys climbObj*/) {
 //		ds = DriverStation.getInstance();
@@ -32,35 +32,35 @@ public class Teleop {
 		if (joystick.getRawButton(1))
 		{
 			// Reduced effort
-			drive.arcadeDrive(joystick.getY()/2, -joystick.getX()/2);
+			drive.arcadeDrive(-joystick.getY()/2, joystick.getX()/2);
 		}
 		else
 		{
 			// Full effort
-			drive.arcadeDrive(joystick.getY(), -joystick.getX());
+			drive.arcadeDrive(-joystick.getY(), joystick.getX());
 		}
 		
 		double effort = 0;
-		// In, fast
-		if (joystick.getRawButton(4)/* || xbox.getRawButton(2)*/) //5
-		{
-			effort = -1.0;
-		}
+//		// In, fast
+//		if (joystick.getRawButton(4)/* || xbox.getRawButton(2)*/) //5
+//		{
+//			effort = -1.0;
+//		}
 		// In, slow - fixed
-		else if (joystick.getRawButton(2)/* || xbox.getRawButton(1)*/) //3
+		/*else*/ if (joystick.getRawButton(2)/* || xbox.getRawButton(1)*/) //3
 		{
 			effort = -0.50;
 		}
-		// In, slow - variable (left xBox)
+//		// In, slow - variable (left xBox)
 //		else if (xbox.getRawAxis(3) < -0.1)
 //		{
 //			effort = 0.25 * xbox.getRawAxis(3);
 //		}
-		// Out, fast
-		else if (joystick.getRawButton(3)/* || xbox.getRawButton(4)*/) //6
-		{
-			effort = 1.0;
-		}
+//		// Out, fast
+//		else if (joystick.getRawButton(3)/* || xbox.getRawButton(4)*/) //6
+//		{
+//			effort = 1.0;
+//		}
 		// Out, slow
 		else if (joystick.getRawButton(5)/* || xbox.getRawButton(3)*/) //4
 		{
@@ -89,8 +89,8 @@ public class Teleop {
 //    	}
 //    	button6PrevValue = button6Value;
 
-    	boolean button10Value = joystick.getRawButton(10); //11
-    	if (button10Value && !button10PrevValue)
+    	boolean button3Value = joystick.getRawButton(3); //11
+    	if (button3Value && !button3PrevValue)
     	{
     		double leftDist = drive.encoderGetDistLeft();
     		double rightDist = drive.encoderGetDistRight();
@@ -99,15 +99,15 @@ public class Teleop {
     		System.out.printf("Drive Encoder Dist L:%.2f R:%.2f Rate L:%.2f R:%.2f\n",
     				leftDist, rightDist, leftRate, rightRate);
     	}
-    	button10PrevValue = button10Value;
+    	button3PrevValue = button3Value;
     	
-    	boolean button11Value = joystick.getRawButton(11); //12
-    	if (button11Value && !button11PrevValue)
+    	boolean button4Value = joystick.getRawButton(4); //12
+    	if (button4Value && !button4PrevValue)
     	{
     		drive.encoderReset();
     		System.out.println("Drive Encoder Reset");
     	}
-    	button11PrevValue = button11Value;
+    	button4PrevValue = button4Value;
     	
 //    	// Arm (xBox rightY)
 //    	double axisValueArm = xbox.getRawAxis(5);

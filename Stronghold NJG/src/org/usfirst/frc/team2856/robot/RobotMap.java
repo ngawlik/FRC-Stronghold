@@ -20,9 +20,9 @@ public class RobotMap {
 	// Drive system directions
 	public static final boolean
 		DRIVE_MOTOR_LEFT_AUTO_DIR = false,
-		DRIVE_MOTOR_LEFT_TELE_DIR = true,
+		DRIVE_MOTOR_LEFT_TELE_DIR = false,
 		DRIVE_MOTOR_RIGHT_AUTO_DIR = true,
-		DRIVE_MOTOR_RIGHT_TELE_DIR = true;
+		DRIVE_MOTOR_RIGHT_TELE_DIR = false;
 
 	// Drive system parameters
 	public static final int
