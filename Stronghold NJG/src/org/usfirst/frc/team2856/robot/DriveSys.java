@@ -37,11 +37,11 @@ public class DriveSys {
 //		// Set gyro sensitivity
 //		RobotMap.DRIVE_GYRO.setSensitivity(RobotMap.DRIVE_GYRO_SENSITIVITY);
 		
-//		// Calibrate gyro
-//		RobotMap.DRIVE_GYRO.calibrate();
+		// Calibrate gyro
+		RobotMap.DRIVE_GYRO.calibrate();
 		
-//		// Start gyro
-//		RobotMap.DRIVE_GYRO.reset();
+		// Start gyro
+		RobotMap.DRIVE_GYRO.reset();
 		
 //		// Start Ultrasonic
 //		RobotMap.DRIVE_ULTRASONIC.setAutomaticMode(true);
@@ -131,17 +131,18 @@ public class DriveSys {
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();
 	}
 
-//	public double gyroGetAngle() {
-//		return RobotMap.DRIVE_GYRO.getAngle();
-//	}
+	public double gyroGetAngle() {
+		return RobotMap.DRIVE_GYRO.getAngle();
+	}
 
-//	public double gyroGetRate() {
-//		return RobotMap.DRIVE_GYRO.getRate();
-//	}
+	public double gyroGetRate() {
+		return RobotMap.DRIVE_GYRO.getRate();
+	}
 
-//	public void gyroReset() {
-//		RobotMap.DRIVE_GYRO.reset();
-//	}
+	public void gyroReset() {
+//		RobotMap.DRIVE_GYRO.calibrate();
+		RobotMap.DRIVE_GYRO.reset();
+	}
 
 	public void initAuto() {
 		// Disable user watchdog (since RobotDrive will not be called)

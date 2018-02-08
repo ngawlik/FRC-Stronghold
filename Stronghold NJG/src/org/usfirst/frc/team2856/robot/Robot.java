@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2856.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -10,6 +13,12 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private static final String kDefaultAuto = "Default";
+	private static final String kCustomAuto = "My Auto";
+
+	private PowerDistributionPanel power;
+
 //	private ClimbSys climb;
 	private DriveSys drive;
 	private IntakeSys intake;
@@ -18,7 +27,7 @@ public class Robot extends IterativeRobot {
 	private Autonomous auto;
 	private Disabled disa;
 	private Teleop tele;
-
+	
 	/**
 	 * Default Robot-wide initialization which will be called when the robot is
 	 * first powered on. It will be called exactly one time.
@@ -31,6 +40,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		RobotMap.init();  // Must initialize first
 		
+		power = new PowerDistributionPanel();
+		System.out.printf("PowerDistTemp:%.0f C\n", power.getTemperature());
+
+		m_chooser.addDefault("Default Auto", kDefaultAuto);
+		m_chooser.addObject("My Auto", kCustomAuto);
+		SmartDashboard.putData("Auto modes", m_chooser);
+
 //		climb = new ClimbSys();
 		drive = new DriveSys();
 		intake = new IntakeSys();

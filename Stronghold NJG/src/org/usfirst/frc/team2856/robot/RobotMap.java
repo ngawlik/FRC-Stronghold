@@ -1,9 +1,11 @@
 package org.usfirst.frc.team2856.robot;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 //import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.GyroBase;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -48,10 +50,10 @@ public class RobotMap {
 
 	// Power channels
 	public static final int
-		DRIVE_POWER_LEFT_FRONT = 0,
-		DRIVE_POWER_RIGHT_FRONT = 1,
-		DRIVE_POWER_LEFT_REAR = 2,
-		DRIVE_POWER_RIGHT_REAR = 3;
+		DRIVE_POWER_LEFT_FRONT = 15,
+		DRIVE_POWER_RIGHT_FRONT = 13,
+		DRIVE_POWER_LEFT_REAR = 14,
+		DRIVE_POWER_RIGHT_REAR = 12;
 //		CAMERA_POWER = 4,
 //		VRM_POWER = 5,
 //		INTAKE_POWER = 15;
@@ -64,6 +66,8 @@ public class RobotMap {
 	public static Encoder
 		DRIVE_ENCODER_LEFT,
 		DRIVE_ENCODER_RIGHT;
+	public static GyroBase
+		DRIVE_GYRO;
 	public static SpeedController
 		DRIVE_MOTOR_LEFT,
 		DRIVE_MOTOR_RIGHT;
@@ -99,5 +103,8 @@ public class RobotMap {
 //		INTAKE_MOTOR = new Victor(2);
 
 		// Relay (0-3, none)
+		
+		// SPI Port
+		DRIVE_GYRO = new ADXRS450_Gyro();
 	}
 }
