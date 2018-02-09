@@ -1,20 +1,32 @@
 package org.usfirst.frc.team2856.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Autonomous {
 	private DriveSys drive;
 
-	private String autoSelected;
-	private Integer state;
+	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	private String m_autoSelected;
+//	private String autoSelected;
+	private static final String kDefaultAuto = "Default";
+	private static final String kCustomAuto = "My Auto";
+
+	private Integer state;	
 
 	public Autonomous(DriveSys driveObj) {
 		drive = driveObj;
+
+		m_chooser.addDefault("Default Auto", kDefaultAuto);
+		m_chooser.addObject("My Auto", kCustomAuto);
+		SmartDashboard.putData("Auto modes", m_chooser);
 	}
 
 	public void init() {
-		autoSelected = SmartDashboard.getString("Auto Selector", "None");
-		System.out.println("Auto selected: " + autoSelected);
+		m_autoSelected = m_chooser.getSelected();
+		System.out.println("Auto selected: " + m_autoSelected);
+//		autoSelected = SmartDashboard.getString("Auto Selector", "None");
+//		System.out.println("Auto selected: " + autoSelected);
 		state = 0;
 
 		drive.initAuto();
@@ -27,7 +39,7 @@ public class Autonomous {
 	}
 
 	private void stateMachine() {
-		switch(autoSelected) {
+		switch(m_autoSelected /*autoSelected*/) {
 			case "Forward":
 				switch(state) {
 					case 0:
