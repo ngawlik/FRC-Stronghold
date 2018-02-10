@@ -32,12 +32,12 @@ public class Teleop {
 		if (joystick.getRawButton(1))
 		{
 			// Reduced effort
-			drive.arcadeDrive(-joystick.getY()/2, joystick.getX()/2);
+			drive.arcadeDrive(-joystick.getY()/2, joystick.getZ()/2);
 		}
 		else
 		{
 			// Full effort
-			drive.arcadeDrive(-joystick.getY(), joystick.getX());
+			drive.arcadeDrive(-joystick.getY(), joystick.getZ());
 		}
 		
 		double effort = 0;

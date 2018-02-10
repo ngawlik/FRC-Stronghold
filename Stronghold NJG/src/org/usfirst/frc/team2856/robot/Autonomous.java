@@ -9,16 +9,26 @@ public class Autonomous {
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	private String m_autoSelected;
 //	private String autoSelected;
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
+	private static final String
+		kModeDefault = "Default",
+		kModeForward = "Forward",
+		kModeFwdRev  = "FwdRev",
+		kModeLine    = "Line",
+		kModeSquare  = "Square",
+		kModeTurn    = "Turn";
+		
 
 	private Integer state;	
 
 	public Autonomous(DriveSys driveObj) {
 		drive = driveObj;
 
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
+		m_chooser.addDefault(kModeDefault, kModeDefault);
+		m_chooser.addObject(kModeForward, kModeForward);
+		m_chooser.addObject(kModeFwdRev, kModeFwdRev);
+		m_chooser.addObject(kModeLine, kModeLine);
+		m_chooser.addObject(kModeSquare, kModeSquare);
+		m_chooser.addObject(kModeTurn, kModeTurn);
 		SmartDashboard.putData("Auto modes", m_chooser);
 	}
 
@@ -40,7 +50,7 @@ public class Autonomous {
 
 	private void stateMachine() {
 		switch(m_autoSelected /*autoSelected*/) {
-			case "Forward":
+			case kModeForward:
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
@@ -53,7 +63,7 @@ public class Autonomous {
 						break;
 				}
 				break;
-			case "FwdRev":
+			case kModeFwdRev:
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
@@ -73,7 +83,7 @@ public class Autonomous {
 						break;
 				}
 				break;
-			case "Line":
+			case kModeLine:
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
@@ -107,7 +117,7 @@ public class Autonomous {
 						break;
 				}
 				break;
-			case "Square":
+			case kModeSquare:
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
@@ -169,7 +179,7 @@ public class Autonomous {
 						break;
 				}
 				break;
-			case "Turn":
+			case kModeTurn:
 				switch(state) {
 					case 0:
 						if(!drive.moveGetActive())
