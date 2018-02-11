@@ -14,7 +14,8 @@ public class VisionSys {
 //	private Thread visionThread;
 	
 	public VisionSys() {
-		CameraServer.getInstance().addAxisCamera("axis-camera.local");
+//		CameraServer.getInstance().addAxisCamera("axis-camera.local");  // Axis camera
+		CameraServer.getInstance().startAutomaticCapture();             // USB camera
 //		visionThread = new Thread(() -> {
 //			// Get the Axis camera from CameraServer
 //			AxisCamera camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
