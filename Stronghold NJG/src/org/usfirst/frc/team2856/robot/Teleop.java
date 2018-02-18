@@ -76,8 +76,8 @@ public class Teleop {
     	boolean button5Value = joystick.getRawButton(5); //9
     	if (button5Value && !button5PrevValue)
     	{
-    		double angle = drive.gyroGetAngle();
-    		System.out.printf("Drive Gyro Angle:%.0f\n", angle);
+//    		drive.gyroCalibrate();
+//    		System.out.println("Drive Gyro Calibrate");
     	}
     	button5PrevValue = button5Value;
 

@@ -9,8 +9,8 @@ public class DriveSys {
 	private DifferentialDrive robotDrive;
 	private PIDController leftPID, rightPID;
 	
-	private double leftMultiplier, rightMultiplier;//, thetaRatio;
-	private double leftInitialPos, rightInitialPos;//, thetaInitial;
+	private double leftMultiplier, rightMultiplier, thetaRatio;
+	private double leftInitialPos, rightInitialPos, thetaInitial;
 	private boolean moveActive;
 	private MoveRefGen refGen;
 //	private double smallNumber;
@@ -20,7 +20,10 @@ public class DriveSys {
 		kDashDriveMaxSpeed = "DriveMaxSpeed",
 		kDashDrivePosKp = "DrivePosKp",
 		kDashDrivePosKi = "DrivePosKi",
-		kDashDrivePosKd = "DrivePosKd";
+		kDashDrivePosKd = "DrivePosKd",
+		kDashDriveTheta = "DriveTheta",
+		kDashDriveGyro = "DriveGyro",
+		kDashDriveAngErr = "DriveAngleError";
 
 	public DriveSys() {
 		// Create robotDrive object
@@ -68,6 +71,9 @@ public class DriveSys {
 		SmartDashboard.putNumber(kDashDrivePosKp, RobotMap.DRIVE_PID_POSITION_KP);
 		SmartDashboard.putNumber(kDashDrivePosKi, RobotMap.DRIVE_PID_POSITION_KI);
 		SmartDashboard.putNumber(kDashDrivePosKd, RobotMap.DRIVE_PID_POSITION_KD);
+		SmartDashboard.putNumber(kDashDriveTheta, 0);
+		SmartDashboard.putNumber(kDashDriveGyro, 0);
+		SmartDashboard.putNumber(kDashDriveAngErr, 0);
 	}
 
 	public void arcadeDrive(double moveValue, double rotateValue) {
@@ -93,6 +99,11 @@ public class DriveSys {
 	public void encoderReset() {
 		RobotMap.DRIVE_ENCODER_LEFT.reset();
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();
+	}
+
+	public void gyroCalibrate() {
+		RobotMap.DRIVE_GYRO.calibrate();
+		RobotMap.DRIVE_GYRO.reset();
 	}
 
 	public double gyroGetAngle() {
@@ -158,7 +169,7 @@ public class DriveSys {
 		// Latch in initial positions
 		leftInitialPos = RobotMap.DRIVE_ENCODER_LEFT.getDistance();
 		rightInitialPos = RobotMap.DRIVE_ENCODER_RIGHT.getDistance();
-//		thetaInitial = gyroGetAngle();
+		thetaInitial = gyroGetAngle();
 
         // Set encoders to output position to PID controllers
 		RobotMap.DRIVE_ENCODER_LEFT.setPIDSourceType(PIDSourceType.kDisplacement);
@@ -185,7 +196,7 @@ public class DriveSys {
 	public void moveStraight(double distance) {
 		leftMultiplier = 1.0;
 		rightMultiplier = 1.0;
-//		thetaRatio = 0.0;
+		thetaRatio = 0.0;
 		moveStart(distance);
 	}
 
@@ -210,7 +221,7 @@ public class DriveSys {
 			rightMultiplier = rightRadius/fullRadius;
 		}
 		distance = (angle / 360.0) * 2.0 * Math.PI * fullRadius;
-//		thetaRatio = angle / distance;
+		thetaRatio = angle / distance;
 		moveStart(distance);
 	}
 
@@ -239,10 +250,13 @@ public class DriveSys {
 			if (refGen.isActive())
 			{
 				double refPos = refGen.getRefPosition();
-//				double theta = thetaRatio * refPos + thetaInitial;
-//				double angleError = gyroGetAngle() - theta;
+				double theta = thetaRatio * refPos + thetaInitial;
+				double gyro = gyroGetAngle();
+				double angleError = gyro - theta;
 				
-//				SmartDashboard.putNumber("Drive.AngleError", angleError);
+				SmartDashboard.putNumber(kDashDriveTheta, theta);
+				SmartDashboard.putNumber(kDashDriveGyro, gyro);
+				SmartDashboard.putNumber(kDashDriveAngErr, angleError);
 				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
 				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
 			}
