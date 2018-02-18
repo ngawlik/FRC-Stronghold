@@ -1,23 +1,27 @@
 package org.usfirst.frc.team2856.robot;
 
-//import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PIDController;
-//import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 public class DriveSys {
 	private DifferentialDrive robotDrive;
 	private PIDController leftPID, rightPID;
-//	private PowerDistributionPanel power;
-//	private NetworkTable table;
 	
 	private double leftMultiplier, rightMultiplier;//, thetaRatio;
 	private double leftInitialPos, rightInitialPos;//, thetaInitial;
 	private boolean moveActive;
 	private MoveRefGen refGen;
-	private double smallNumber;
-	
+//	private double smallNumber;
+
+	private static final String
+		kDashDriveAccelRate = "DriveAccelRate",
+		kDashDriveMaxSpeed = "DriveMaxSpeed",
+		kDashDrivePosKp = "DrivePosKp",
+		kDashDrivePosKi = "DrivePosKi",
+		kDashDrivePosKd = "DrivePosKd";
+
 	public DriveSys() {
 		// Create robotDrive object
 		robotDrive = new DifferentialDrive(RobotMap.DRIVE_MOTOR_LEFT, RobotMap.DRIVE_MOTOR_RIGHT);
@@ -58,57 +62,17 @@ public class DriveSys {
 		moveActive = false;
 		refGen = new MoveRefGen();
 		
-//		// Create power distribution panel object
-//		power = new PowerDistributionPanel();
-
-//		// Create network table object
-//		table = NetworkTableInstance.getTable(RobotMap.NT_SOURCE);
-		
-//		// Set initial network table values
-//		table. //.putNumber("Drive.AccelRate", RobotMap.DRIVE_ACCEL_RATE);
-//		table.putNumber("Drive.MaxSpeed", RobotMap.DRIVE_SPEED_MAX);
-//		table.putNumber("Drive.Pos.Kp", RobotMap.DRIVE_PID_POSITION_KP);
-//		table.putNumber("Drive.Pos.Ki", RobotMap.DRIVE_PID_POSITION_KI);
-//		table.putNumber("Drive.Pos.Kd", RobotMap.DRIVE_PID_POSITION_KD);
+		// Set initial network table values
+		SmartDashboard.putNumber(kDashDriveAccelRate, RobotMap.DRIVE_ACCEL_RATE);
+		SmartDashboard.putNumber(kDashDriveMaxSpeed, RobotMap.DRIVE_SPEED_MAX);
+		SmartDashboard.putNumber(kDashDrivePosKp, RobotMap.DRIVE_PID_POSITION_KP);
+		SmartDashboard.putNumber(kDashDrivePosKi, RobotMap.DRIVE_PID_POSITION_KI);
+		SmartDashboard.putNumber(kDashDrivePosKd, RobotMap.DRIVE_PID_POSITION_KD);
 	}
 
 	public void arcadeDrive(double moveValue, double rotateValue) {
 		robotDrive.arcadeDrive(moveValue, rotateValue, true);
 	}
-
-//	public void arcadeDrive(double yValue, double xValue, boolean useGyro) {
-//		if (useGyro)
-//		{// Field-oriented driving - integrator needed?
-//			double moveValue, rotateValue;
-//			double magnitude = Math.sqrt(Math.pow(yValue, 2) + Math.pow(xValue, 2));
-//			if (magnitude != 0)
-//			{
-//				double angleCord = (magnitude != 0) ? Math.atan2(xValue, -yValue) : 0;
-//				double angleGyro = Math.toRadians(RobotMap.DRIVE_GYRO.getAngle());
-//				double angleTheta = angleCord - angleGyro;
-//				moveValue = -magnitude * Math.cos(angleTheta);
-//				rotateValue = magnitude * Math.sin(angleTheta);
-//				
-//				table.putNumber("Drive.yValue", yValue);
-//				table.putNumber("Drive.xValue", xValue);
-//				table.putNumber("Drive.angleCord", Math.toDegrees(angleCord));
-//				table.putNumber("Drive.angleGyro", Math.toDegrees(angleGyro));
-//				table.putNumber("Drive.angleTheta", Math.toDegrees(angleTheta));
-//				table.putNumber("Drive.moveValue", moveValue);
-//				table.putNumber("Drive.rotateValue", rotateValue);
-//			}
-//			else
-//			{
-//				moveValue = 0;
-//				rotateValue = 0;
-//			}
-//			robotDrive.arcadeDrive(moveValue, rotateValue, false);
-//		}
-//		else
-//		{// Robot-oriented driving
-//			robotDrive.arcadeDrive(yValue, xValue, true);
-//		}
-//	}
 
 	public double encoderGetDistLeft() {
 		return RobotMap.DRIVE_ENCODER_LEFT.getDistance();
@@ -140,7 +104,6 @@ public class DriveSys {
 	}
 
 	public void gyroReset() {
-//		RobotMap.DRIVE_GYRO.calibrate();
 		RobotMap.DRIVE_GYRO.reset();
 	}
 
@@ -177,16 +140,16 @@ public class DriveSys {
 	}
 	
 	private void moveStart(double distance) {
-		double Kp, Ki, Kd;
 		double accelRate;
 		double maxSpeed;
+		double Kp, Ki, Kd;
 
 		// Update local parameters
-		Kp = /*table.getNumber("Drive.Pos.Kp", */RobotMap.DRIVE_PID_POSITION_KP/*)*/;
-		Ki = /*table.getNumber("Drive.Pos.Ki", */RobotMap.DRIVE_PID_POSITION_KI/*)*/;
-		Kd = /*table.getNumber("Drive.Pos.Kd", */RobotMap.DRIVE_PID_POSITION_KD/*)*/;
-		accelRate = /*table.getNumber("Drive.AccelRate", */RobotMap.DRIVE_ACCEL_RATE/*)*/;
-		maxSpeed = /*table.getNumber("Drive.MaxSpeed", */RobotMap.DRIVE_SPEED_MAX/*)*/;
+		accelRate = SmartDashboard.getNumber(kDashDriveAccelRate, RobotMap.DRIVE_ACCEL_RATE);
+		maxSpeed = SmartDashboard.getNumber(kDashDriveMaxSpeed, RobotMap.DRIVE_SPEED_MAX);
+		Kp = SmartDashboard.getNumber(kDashDrivePosKp, RobotMap.DRIVE_PID_POSITION_KP);
+		Ki = SmartDashboard.getNumber(kDashDrivePosKi, RobotMap.DRIVE_PID_POSITION_KI);
+		Kd = SmartDashboard.getNumber(kDashDrivePosKd, RobotMap.DRIVE_PID_POSITION_KD);
 
 		// Reset PID controllers
 		leftPID.reset();
@@ -279,7 +242,7 @@ public class DriveSys {
 //				double theta = thetaRatio * refPos + thetaInitial;
 //				double angleError = gyroGetAngle() - theta;
 				
-//				table.putNumber("Drive.AngleError", angleError);
+//				SmartDashboard.putNumber("Drive.AngleError", angleError);
 				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
 				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
 			}
@@ -289,33 +252,10 @@ public class DriveSys {
 			}
 		}
 
-		if (debug)
-		{
-			smallNumber = (smallNumber == 0) ? 0.0001 : 0;
-			
-			// Left wheels
-//			table.putNumber("Drive.Left.Pos", RobotMap.DRIVE_ENCODER_LEFT.getDistance() + smallNumber);
-//			table.putNumber("Drive.Left.Vel",  RobotMap.DRIVE_ENCODER_LEFT.getRate() + smallNumber);
-//			table.putNumber("Drive.Left.Effort", RobotMap.DRIVE_MOTOR_LEFT.get() + smallNumber);
-//			table.putNumber("Drive.LF.Current", power.getCurrent(RobotMap.DRIVE_POWER_LEFT_FRONT) + smallNumber);
-//			table.putNumber("Drive.LR.Current", power.getCurrent(RobotMap.DRIVE_POWER_LEFT_REAR) + smallNumber);
-	
-			// Right wheels
-//			table.putNumber("Drive.Right.Pos", RobotMap.DRIVE_ENCODER_RIGHT.getDistance() + smallNumber);
-//			table.putNumber("Drive.Right.Vel",  RobotMap.DRIVE_ENCODER_RIGHT.getRate() + smallNumber);
-//			table.putNumber("Drive.Right.Effort", RobotMap.DRIVE_MOTOR_RIGHT.get() + smallNumber);
-//			table.putNumber("Drive.RF.Current", power.getCurrent(RobotMap.DRIVE_POWER_RIGHT_FRONT) + smallNumber);
-//			table.putNumber("Drive.RR.Current", power.getCurrent(RobotMap.DRIVE_POWER_RIGHT_REAR) + smallNumber);
-			
-			// Gyro
-//			table.putNumber("Drive.Gyro.Angle", gyroGetAngle() + smallNumber);
-//			table.putNumber("Drive.Gyro.Rate", gyroGetRate() + smallNumber);
-			
-//			// IR
-//			table.putNumber("Drive.IR.Dist", irGetDist() + smallNumber);
-			
-			// Ultrasonic
-//			table.putNumber("Drive.Ultrasonic.Range", ultrasonicGetRange() + smallNumber);
-		}
+//		if (debug)
+//		{
+//			smallNumber = (smallNumber == 0) ? 0.0001 : 0;
+//			
+//		}
 	}
 }

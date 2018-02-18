@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 //import edu.wpi.first.wpilibj.Victor;
 
 public class RobotMap {
-//	public static final String NT_SOURCE = "SmartDashboard"; // Network table
 	public static final double PERIODIC_UPDATE_PERIOD = 0.020; // Periodic update period (s)
 
 	// Autonomous
