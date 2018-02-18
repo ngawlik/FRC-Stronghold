@@ -75,6 +75,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
+	 * Code which will be called periodically at a regular rate in all modes. (50 Hz)
+	 */
+	public void robotPeriodic() {
+		/* unused */
+	}
+
+	/**
 	 * Code which will be called periodically at a regular rate while the robot is in
 	 * disabled mode. (50 Hz)
 	 */

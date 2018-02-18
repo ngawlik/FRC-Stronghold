@@ -15,7 +15,8 @@ public class VisionSys {
 	
 	public VisionSys() {
 //		CameraServer.getInstance().addAxisCamera("axis-camera.local");  // Axis camera
-		CameraServer.getInstance().startAutomaticCapture();             // USB camera
+		CameraServer.getInstance().addAxisCamera("10.28.56.10");  // Axis camera (fixed IP)
+		CameraServer.getInstance().startAutomaticCapture();       // USB camera (default = 0)
 //		visionThread = new Thread(() -> {
 //			// Get the Axis camera from CameraServer
 //			AxisCamera camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
