@@ -5,18 +5,26 @@ package org.usfirst.frc.team2856.robot;
 //import org.opencv.core.Scalar;
 //import org.opencv.imgproc.Imgproc;
 
-//import edu.wpi.cscore.AxisCamera;
 //import edu.wpi.cscore.CvSink;
 //import edu.wpi.cscore.CvSource;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.cscore.AxisCamera;
+import edu.wpi.cscore.UsbCamera;
 
 public class VisionSys {
 //	private Thread visionThread;
 	
 	public VisionSys() {
-//		CameraServer.getInstance().addAxisCamera("axis-camera.local");  // Axis camera
-		CameraServer.getInstance().addAxisCamera("10.28.56.10");  // Axis camera (fixed IP)
-		CameraServer.getInstance().startAutomaticCapture();       // USB camera (default = 0)
+		// Axis camera (fixed IP)
+		AxisCamera aCamera = CameraServer.getInstance().addAxisCamera("10.28.56.10");
+		aCamera.setFPS(15);
+		aCamera.setResolution(320, 240);
+
+		// USB camera (default = 0)
+		UsbCamera uCamera = CameraServer.getInstance().startAutomaticCapture();
+		uCamera.setFPS(15);
+		uCamera.setResolution(320, 240);
+
 //		visionThread = new Thread(() -> {
 //			// Get the Axis camera from CameraServer
 //			AxisCamera camera = CameraServer.getInstance().addAxisCamera("axis-camera.local");
