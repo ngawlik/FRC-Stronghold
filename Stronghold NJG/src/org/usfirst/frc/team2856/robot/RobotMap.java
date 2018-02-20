@@ -37,7 +37,7 @@ public class RobotMap {
 //		DRIVE_IR_CONVERSION = 4.277,		// (inch-volts)
 //		DRIVE_IR_MAX_DIST = 16.0,			// (inches)
 //		DRIVE_IR_THRESHOLD = 0.3,			// (volts)
-		DRIVE_PID_EFFORT_MAX = 1.0,			// (0-1) 1.0
+		DRIVE_PID_EFFORT_MAX = 0.5,			// (0-1) 1.0
 		DRIVE_PID_PERIOD = 0.010,			// (s) 0.010
 		DRIVE_PID_POS_SETTLE = 0.25,		// (s) 0.25
 		DRIVE_SPEED_MAX = 2.5,				// (ft/s) 5.0
@@ -47,7 +47,10 @@ public class RobotMap {
 	public static final double
 		DRIVE_PID_POSITION_KP = 2.00,		// 2.00
 		DRIVE_PID_POSITION_KI = 0.01,		// 0.01
-		DRIVE_PID_POSITION_KD = 1.00;		// 1.00
+		DRIVE_PID_POSITION_KD = 1.00,		// 1.00
+		DRIVE_PID_ANGLE_KP = 0.02,
+		DRIVE_PID_ANGLE_KI = 0.0004,
+		DRIVE_PID_ANGLE_KD = 0.0;
 
 	// Power channels
 	public static final int
@@ -60,8 +63,6 @@ public class RobotMap {
 	// Object declarations
 //	public static AnalogInput
 //		DRIVE_IR;
-//	public static AnalogGyro
-//		DRIVE_GYRO;
 	public static Encoder
 		DRIVE_ENCODER_LEFT,
 		DRIVE_ENCODER_RIGHT;
@@ -81,7 +82,7 @@ public class RobotMap {
 	// Object initialization
 	public static void init() {
 		// Analog In (0-3, 4-7)
-//		DRIVE_GYRO = new AnalogGyro(0);
+//		DRIVE_GYRO = new AnalogGyro(0); ((AnalogGyro)DRIVE_GYRO).setSensitivity(DRIVE_GYRO_SENSITIVITY);
 //		DRIVE_IR = new AnalogInput(3);
 
 		// Analog Out (none, 0-1)

@@ -11,19 +11,23 @@ public class DriveSys {
 	
 	private double leftMultiplier, rightMultiplier, thetaRatio;
 	private double leftInitialPos, rightInitialPos, thetaInitial;
+	private double angErrKp, angErrKi, angErrKd, angErrSum, angErrPrev;
 	private boolean moveActive;
 	private MoveRefGen refGen;
-//	private double smallNumber;
 
 	private static final String
+		kDashDriveAngKp = "DriveAngleKp",
+		kDashDriveAngKi = "DriveAngleKi",
+		kDashDriveAngKd = "DriveAngleKd",
 		kDashDriveAccelRate = "DriveAccelRate",
 		kDashDriveMaxSpeed = "DriveMaxSpeed",
 		kDashDrivePosKp = "DrivePosKp",
 		kDashDrivePosKi = "DrivePosKi",
-		kDashDrivePosKd = "DrivePosKd",
-		kDashDriveTheta = "DriveTheta",
-		kDashDriveGyro = "DriveGyro",
-		kDashDriveAngErr = "DriveAngleError";
+		kDashDrivePosKd = "DrivePosKd";
+//		kDashDriveTheta = "DriveTheta",
+//		kDashDriveGyro = "DriveGyro",
+//		kDashDriveAngErr = "DriveAngleError",
+//		kDashDriveGyroCor = "DriveGyroCor";
 
 	public DriveSys() {
 		// Create robotDrive object
@@ -40,12 +44,6 @@ public class DriveSys {
 		// Start encoders
 		RobotMap.DRIVE_ENCODER_LEFT.reset();
 		RobotMap.DRIVE_ENCODER_RIGHT.reset();
-		
-//		// Set gyro sensitivity
-//		RobotMap.DRIVE_GYRO.setSensitivity(RobotMap.DRIVE_GYRO_SENSITIVITY);
-		
-		// Calibrate gyro
-		RobotMap.DRIVE_GYRO.calibrate();
 		
 		// Start gyro
 		RobotMap.DRIVE_GYRO.reset();
@@ -66,14 +64,18 @@ public class DriveSys {
 		refGen = new MoveRefGen();
 		
 		// Set initial network table values
+		SmartDashboard.putNumber(kDashDriveAngKp, RobotMap.DRIVE_PID_ANGLE_KP);
+		SmartDashboard.putNumber(kDashDriveAngKi, RobotMap.DRIVE_PID_ANGLE_KI);
+		SmartDashboard.putNumber(kDashDriveAngKd, RobotMap.DRIVE_PID_ANGLE_KD);
 		SmartDashboard.putNumber(kDashDriveAccelRate, RobotMap.DRIVE_ACCEL_RATE);
 		SmartDashboard.putNumber(kDashDriveMaxSpeed, RobotMap.DRIVE_SPEED_MAX);
 		SmartDashboard.putNumber(kDashDrivePosKp, RobotMap.DRIVE_PID_POSITION_KP);
 		SmartDashboard.putNumber(kDashDrivePosKi, RobotMap.DRIVE_PID_POSITION_KI);
 		SmartDashboard.putNumber(kDashDrivePosKd, RobotMap.DRIVE_PID_POSITION_KD);
-		SmartDashboard.putNumber(kDashDriveTheta, 0);
-		SmartDashboard.putNumber(kDashDriveGyro, 0);
-		SmartDashboard.putNumber(kDashDriveAngErr, 0);
+//		SmartDashboard.putNumber(kDashDriveTheta, 0);
+//		SmartDashboard.putNumber(kDashDriveGyro, 0);
+//		SmartDashboard.putNumber(kDashDriveAngErr, 0);
+//		SmartDashboard.putNumber(kDashDriveGyroCor, 0);
 	}
 
 	public void arcadeDrive(double moveValue, double rotateValue) {
@@ -154,6 +156,13 @@ public class DriveSys {
 		double accelRate;
 		double maxSpeed;
 		double Kp, Ki, Kd;
+
+		// Update object parameters
+		angErrKp = SmartDashboard.getNumber(kDashDriveAngKp, RobotMap.DRIVE_PID_ANGLE_KP);
+		angErrKi = SmartDashboard.getNumber(kDashDriveAngKi, RobotMap.DRIVE_PID_ANGLE_KI);
+		angErrKd = SmartDashboard.getNumber(kDashDriveAngKd, RobotMap.DRIVE_PID_ANGLE_KD);
+		angErrSum = 0;
+		angErrPrev = 0;
 
 		// Update local parameters
 		accelRate = SmartDashboard.getNumber(kDashDriveAccelRate, RobotMap.DRIVE_ACCEL_RATE);
@@ -252,13 +261,23 @@ public class DriveSys {
 				double refPos = refGen.getRefPosition();
 				double theta = thetaRatio * refPos + thetaInitial;
 				double gyro = gyroGetAngle();
-				double angleError = gyro - theta;
+				double angleError = theta - gyro;
+				double proportional, integral, derivative, gyroCorrection;
 				
-				SmartDashboard.putNumber(kDashDriveTheta, theta);
-				SmartDashboard.putNumber(kDashDriveGyro, gyro);
-				SmartDashboard.putNumber(kDashDriveAngErr, angleError);
-				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos);
-				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos);
+				angErrSum += angleError;
+				proportional = angErrKp * angleError;
+				integral = angErrKi * angErrSum;
+				derivative = angErrKd * (angleError - angErrPrev);
+				gyroCorrection = proportional + integral + derivative;
+				angErrPrev = angleError;
+				
+				leftPID.setSetpoint(leftMultiplier * refPos + leftInitialPos + gyroCorrection);
+				rightPID.setSetpoint(rightMultiplier * refPos + rightInitialPos - gyroCorrection);
+				
+//				SmartDashboard.putNumber(kDashDriveTheta, theta);
+//				SmartDashboard.putNumber(kDashDriveGyro, gyro);
+//				SmartDashboard.putNumber(kDashDriveAngErr, angleError);
+//				SmartDashboard.putNumber(kDashDriveGyroCor, gyroCorrection);
 			}
 			else
 			{
@@ -268,8 +287,7 @@ public class DriveSys {
 
 //		if (debug)
 //		{
-//			smallNumber = (smallNumber == 0) ? 0.0001 : 0;
-//			
+//			/* unused */
 //		}
 	}
 }

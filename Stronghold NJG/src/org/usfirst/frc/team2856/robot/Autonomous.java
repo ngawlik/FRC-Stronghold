@@ -95,7 +95,7 @@ public class Autonomous {
 					case 1:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*180.0, 0.0);
+							drive.moveTurn(180.0, 0.0);
 							state++;
 						}
 						break;
@@ -109,7 +109,7 @@ public class Autonomous {
 					case 3:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(-1.25*180.0, 0.0);
+							drive.moveTurn(-180.0, 0.0);
 							state++;
 						}
 						break;
@@ -129,7 +129,7 @@ public class Autonomous {
 					case 1:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*90.0, 2.0);
+							drive.moveTurn(90.0, 2.0);
 							state++;
 						}
 						break;
@@ -143,7 +143,7 @@ public class Autonomous {
 					case 3:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*90.0, 2.0);
+							drive.moveTurn(90.0, 2.0);
 							state++;
 						}
 						break;
@@ -157,7 +157,7 @@ public class Autonomous {
 					case 5:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*90.0, 2.0);
+							drive.moveTurn(90.0, 2.0);
 							state++;
 						}
 						break;
@@ -171,7 +171,7 @@ public class Autonomous {
 					case 7:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*90.0, 2.0);
+							drive.moveTurn(90.0, 2.0);
 							state++;
 						}
 						break;
@@ -184,7 +184,7 @@ public class Autonomous {
 					case 0:
 						if(!drive.moveGetActive())
 						{
-							drive.moveTurn(1.25*90.0, 0.0);
+							drive.moveTurn(90.0, 0.0);
 							state++;
 						}
 						break;
