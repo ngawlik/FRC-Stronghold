@@ -248,9 +248,9 @@ public class DriveSys {
 		robotDrive.stopMotor();
 	}
 
-	public double ultrasonicGetRange() {
-		return RobotMap.DRIVE_ULTRASONIC.getRangeInches() / 12.0;
-	}
+//	public double ultrasonicGetRange() {
+//		return RobotMap.DRIVE_ULTRASONIC.getRangeInches() / 12.0;
+//	}
 
 	public void update(boolean debug) {
 		if (moveActive)

@@ -4,28 +4,33 @@ package org.usfirst.frc.team2856.robot;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Teleop {
-//	private ClimbSys climb;
+	private ClimbSys climb;
 //	private DriverStation ds;
 	private DriveSys drive;
 	private IntakeSys intake;
 	private Joystick joystick;
+	private LiftSys lift;
 //	private Joystick xbox;
 	private boolean button5PrevValue;
 	private boolean button6PrevValue;
 	private boolean button3PrevValue;
 	private boolean button4PrevValue;
 
-	public Teleop(DriveSys driveObj, IntakeSys intakeObj/*, ClimbSys climbObj*/) {
+	public Teleop(DriveSys driveObj, ClimbSys climbObj, IntakeSys intakeObj, LiftSys liftObj) {
 //		ds = DriverStation.getInstance();
 		drive = driveObj;
+		climb = climbObj;
 		intake = intakeObj;
-//		climb = climbObj;
+		lift = liftObj;
 		joystick = new Joystick(0);
 //		xbox = new Joystick(1);
 	}
 
 	public void init() {
 		drive.initTele();
+		climb.placeholder();
+		intake.placeholder();
+		lift.placeholder();
 	}
 
 	public void periodic(boolean debug) {
@@ -40,39 +45,6 @@ public class Teleop {
 			drive.arcadeDrive(-joystick.getY(), joystick.getZ());
 		}
 		
-		double effort = 0;
-//		// In, fast
-//		if (joystick.getRawButton(4)/* || xbox.getRawButton(2)*/) //5
-//		{
-//			effort = -1.0;
-//		}
-		// In, slow - fixed
-		/*else*/ if (joystick.getRawButton(2)/* || xbox.getRawButton(1)*/) //3
-		{
-			effort = -0.50;
-		}
-//		// In, slow - variable (left xBox)
-//		else if (xbox.getRawAxis(3) < -0.1)
-//		{
-//			effort = 0.25 * xbox.getRawAxis(3);
-//		}
-//		// Out, fast
-//		else if (joystick.getRawButton(3)/* || xbox.getRawButton(4)*/) //6
-//		{
-//			effort = 1.0;
-//		}
-		// Out, slow
-//		else if (joystick.getRawButton(5)/* || xbox.getRawButton(3)*/) //4
-//		{
-//			effort = 0.50;
-//		}
-//		// Out, slow - variable (right xBox)
-//		else if (xbox.getRawAxis(3) > 0.1)
-//		{
-//			effort = 0.25 * xbox.getRawAxis(3);
-//		}
-        intake.setEffort(effort);
-        
     	boolean button5Value = joystick.getRawButton(5); //9
     	if (button5Value && !button5PrevValue)
     	{
@@ -109,22 +81,6 @@ public class Teleop {
     	}
     	button4PrevValue = button4Value;
     	
-//    	// Arm (xBox rightY)
-//    	double axisValueArm = xbox.getRawAxis(5);
-//    	if (!xbox.getRawButton(6) || ((axisValueArm > -0.1) && (axisValueArm < 0.1)))
-//    	{
-//    		axisValueArm = 0;
-//    	}
-//    	climb.setArmEffort(axisValueArm);
-    	
-//    	// Lift (xBox leftY)
-//    	double axisValueLift = xbox.getRawAxis(2);
-//    	if (!xbox.getRawButton(5) || ((axisValueLift > -0.1) && (axisValueLift < 0.1)))
-//    	{
-//    		axisValueLift = 0;
-//    	}
-//    	climb.setLiftEffort(axisValueLift);
-
     	drive.update(debug);
 	}
 }

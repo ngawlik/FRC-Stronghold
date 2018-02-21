@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2856.robot;
 
-public class IntakeSys {
-	public IntakeSys() {
+public class LiftSys {
+	public LiftSys() {
 		
 	}
 
@@ -9,10 +9,10 @@ public class IntakeSys {
 	}
 
 	public void setEffort(double effort) {
-		RobotMap.INTAKE_MOTOR.set(effort);
+		RobotMap.LIFT_MOTOR.set(effort);
 	}
 
 	public void stop() {
-		RobotMap.INTAKE_MOTOR.stopMotor();
+		RobotMap.LIFT_MOTOR.stopMotor();
 	}
 }

@@ -11,9 +11,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  */
 public class Robot extends IterativeRobot {
 	// Subsystems
-//	private ClimbSys climb;
+	private ClimbSys climb;
 	private DriveSys drive;
 	private IntakeSys intake;
+	private LiftSys lift;
 	private VisionSys vision;
 
 	// Interfaces
@@ -35,15 +36,16 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();  // Must initialize first
 
 		// Subsystems
-//		climb = new ClimbSys();
+		climb = new ClimbSys();
 		drive = new DriveSys();
 		intake = new IntakeSys();
+		lift = new LiftSys();
 		vision = new VisionSys(); vision.placeholder();
 
 		// Interfaces
 		auto = new Autonomous(drive);
-		disa = new Disabled(drive, intake/*, climb*/);
-		tele = new Teleop(drive, intake/*, climb*/);
+		disa = new Disabled(drive, climb, intake, lift);
+		tele = new Teleop(drive, climb, intake, lift);
 	}
 
 	/**

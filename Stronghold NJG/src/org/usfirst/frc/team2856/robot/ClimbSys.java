@@ -5,16 +5,14 @@ public class ClimbSys {
 		
 	}
 
-//	public void setArmEffort(double effort) {
-//		RobotMap.CLIMB_MOTOR_ARM.set(effort);
-//	}
+	public void placeholder() {
+	}
 
-//	public void setLiftEffort(double effort) {
-//		RobotMap.CLIMB_MOTOR_LIFT.set(effort);
-//	}
+	public void setEffort(double effort) {
+		RobotMap.CLIMB_MOTOR.set(effort);
+	}
 
-//	public void stop() {
-//		RobotMap.CLIMB_MOTOR_ARM.stopMotor();
-//		RobotMap.CLIMB_MOTOR_LIFT.stopMotor();
-//	}
+	public void stop() {
+		RobotMap.CLIMB_MOTOR.stopMotor();
+	}
 }
