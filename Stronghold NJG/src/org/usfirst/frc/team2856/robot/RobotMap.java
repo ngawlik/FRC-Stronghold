@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Victor;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 //import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Servo;
 //import edu.wpi.first.wpilibj.Ultrasonic;
 public class RobotMap {
 	public static final double PERIODIC_UPDATE_PERIOD = 0.020; // Periodic update period (s)
@@ -22,6 +23,11 @@ public class RobotMap {
 	// Autonomous
 	public static final double
 		AUTO_DIST = 10.0;					// (feet) 15.0
+
+	// Climb system parameters
+	public static final double
+		CLIMB_SERVO_LATCHED   = 0.3,
+		CLIMB_SERVO_UNLATCHED = 0.7;
 
 	// Drive system directions
 	public static final boolean
@@ -78,6 +84,8 @@ public class RobotMap {
 		CLIMB_MOTOR,
 		INTAKE_MOTOR,
 		LIFT_MOTOR;
+	public static Servo
+		CLIMB_SERVO;
 //	public static Ultrasonic
 //		DRIVE_ULTRASONIC;
 
@@ -103,6 +111,7 @@ public class RobotMap {
 		INTAKE_MOTOR = new Spark(2);
 		CLIMB_MOTOR = new Victor(3);
 		LIFT_MOTOR = new Spark(4);
+		CLIMB_SERVO = new Servo(9);
 
 		// Relay (0-3, none)
 		

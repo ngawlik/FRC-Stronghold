@@ -12,6 +12,10 @@ public class ClimbSys {
 		RobotMap.CLIMB_MOTOR.set(effort);
 	}
 
+	public void setServo(double pos) {
+		RobotMap.CLIMB_SERVO.setPosition(pos);
+	}
+
 	public void stop() {
 		RobotMap.CLIMB_MOTOR.stopMotor();
 	}
