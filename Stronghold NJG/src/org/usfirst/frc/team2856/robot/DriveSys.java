@@ -78,8 +78,8 @@ public class DriveSys {
 //		SmartDashboard.putNumber(kDashDriveGyroCor, 0);
 	}
 
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		robotDrive.arcadeDrive(moveValue, rotateValue, true);
+	public void arcadeDrive(double moveEffort, double rotateEffort) {
+		robotDrive.arcadeDrive(moveEffort, rotateEffort, true);
 	}
 
 	public double encoderGetDistLeft() {
@@ -246,6 +246,10 @@ public class DriveSys {
 	public void stop() {
 		moveStop();
 		robotDrive.stopMotor();
+	}
+
+	public void tankDrive(double leftEffort, double rightEffort) {
+		robotDrive.tankDrive(leftEffort, rightEffort, true);
 	}
 
 //	public double ultrasonicGetRange() {
