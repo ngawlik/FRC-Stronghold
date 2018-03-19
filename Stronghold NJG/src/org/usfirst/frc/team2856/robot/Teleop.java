@@ -34,25 +34,47 @@ public class Teleop {
 
 	public void periodic(boolean debug) {
 		/***** Joystick *****/
+//		if (joystick.getRawButton(1))
+//		{
+//			// Reduced effort
+//			drive.arcadeDrive(-joystick.getY()/2, joystick.getZ()/2);
+//			climb.setEffort(0);
+//			climb.setServo(RobotMap.CLIMB_SERVO_LATCHED);
+//		}
+//		else if (joystick.getRawButton(2))
+//		{
+//			// Climbing (extend +0.25, retract -0.5, hold -0.1)
+//			drive.arcadeDrive(0, 0);
+//			climb.setEffort(-joystick.getY());  // Away from user is negative
+//			climb.setServo(RobotMap.CLIMB_SERVO_UNLATCHED);
+//		}
+//		else
+//		{
+//			// Full effort
+//			drive.arcadeDrive(-joystick.getY(), joystick.getZ());
+//			climb.setEffort(0);
+//			climb.setServo(RobotMap.CLIMB_SERVO_LATCHED);
+//		}
 		if (joystick.getRawButton(1))
-		{
-			// Reduced effort
-			drive.arcadeDrive(-joystick.getY()/2, joystick.getZ()/2);
-			climb.setEffort(0);
-			climb.setServo(RobotMap.CLIMB_SERVO_LATCHED);
-		}
-		else if (joystick.getRawButton(2))
 		{
 			// Climbing (extend +0.25, retract -0.5, hold -0.1)
 			drive.arcadeDrive(0, 0);
 			climb.setEffort(-joystick.getY());  // Away from user is negative
-			climb.setServo(RobotMap.CLIMB_SERVO_UNLATCHED);
 		}
 		else
 		{
 			// Full effort
 			drive.arcadeDrive(-joystick.getY(), joystick.getZ());
 			climb.setEffort(0);
+		}
+
+		// Climb servo
+		if (joystick.getRawButton(2))
+		{
+			climb.setServo(RobotMap.CLIMB_SERVO_UNLATCHED);
+		}
+		else
+		{
 			climb.setServo(RobotMap.CLIMB_SERVO_LATCHED);
 		}
 
